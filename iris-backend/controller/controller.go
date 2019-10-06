@@ -88,10 +88,10 @@ func AuthHandler(ctx iris.Context) {
 }
 
 func Status(ctx iris.Context) {
-	id, _ := ctx.Values().GetInt("sid")
+	sid, _ := ctx.Values().GetInt("sid")
 	school := ctx.Values().GetString("school")
 	_, _ = ctx.JSON(JSON{
-		"id": id,
+		"sid": sid,
 		"school": school,
 	})
 }

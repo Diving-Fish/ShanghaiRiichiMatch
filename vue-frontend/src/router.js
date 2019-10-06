@@ -59,7 +59,7 @@ const router = new Router({
 
 router.beforeEach((to, _from, next) => {
   if (to.path == '/manage') {
-    axios.get('http://47.100.50.175:8088/api/team/stat', {
+    axios.get('http://47.100.50.175:8088/api/player/stat', {
       headers: { Authorization: store.state.jwt }
     }).then(response => {
       store.commit('set_team_id', response.data.team_id)
