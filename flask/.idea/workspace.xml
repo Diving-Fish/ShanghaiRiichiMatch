@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9527bd3-fa15-4405-9e85-194714d14907" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/a.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/source.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/a.py" beforeDir="false" afterPath="$PROJECT_DIR$/a.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +51,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.snapshot">
+  <component name="RunManager" selected="Python.a">
     <configuration name="a" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="majsoul-backend-python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -96,8 +98,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.snapshot" />
         <item itemvalue="Python.a" />
+        <item itemvalue="Python.snapshot" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +124,7 @@
       <workItem from="1566621979673" duration="1076000" />
       <workItem from="1570203103541" duration="125000" />
       <workItem from="1570203453810" duration="746000" />
-      <workItem from="1570348867706" duration="620000" />
+      <workItem from="1570348867706" duration="1504000" />
     </task>
     <servers />
   </component>
@@ -156,5 +158,6 @@
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/majsoul_backend_python$a.coverage" NAME="a Coverage Results" MODIFIED="1565602869165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/majsoul_backend_python$snapshot.coverage" NAME="snapshot Coverage Results" MODIFIED="1566647454359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask$a.coverage" NAME="a Coverage Results" MODIFIED="1570352761429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

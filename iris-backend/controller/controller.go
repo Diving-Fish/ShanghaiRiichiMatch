@@ -251,7 +251,7 @@ func parseString(s string) (int, string) {
 
 func queryPlayerBySidAndSchool(id int, school string) (Player, error) {
 	player := Player{}
-	db.Where("id = ? and school = ?", id, school).First(&player)
+	db.Where("sid = ? and school = ?", id, school).First(&player)
 	if player.Password == "" {
 		return player, errors.New("Can't find player")
 	}
