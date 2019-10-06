@@ -106,9 +106,13 @@ func AuthHandler(ctx iris.Context) {
 func Status(ctx iris.Context) {
 	sid, _ := ctx.Values().GetInt("sid")
 	school := ctx.Values().GetString("school")
+	player, _ := queryPlayerBySidAndSchool(sid, school)
 	_, _ = ctx.JSON(JSON{
 		"sid": sid,
 		"school": school,
+		"nickname": player.Nickname,
+		"game_id": player.GameID,
+		"game_name": player.GameName,
 	})
 }
 

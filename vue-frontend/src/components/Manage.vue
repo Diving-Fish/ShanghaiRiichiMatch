@@ -1,49 +1,17 @@
 <template>
   <div>
     <el-page-header @back="$router.push('/')" content="管理"></el-page-header>
-    <el-container style="width: 80%, margin-top: 40px">
+    <el-container v-if="$store.state.sid == 0" style="width: 80%, margin-top: 40px">
       <el-table :data="players" v-loading="loading">
-        <el-table-column prop="id" label="ID" width="150" />
-        <el-table-column prop="name" label="昵称" min-width="150" />
-        <el-table-column prop="leader" label="身份" width="150" />
+        <el-table-column prop="sid" label="ID" width="150" />
+        <el-table-column prop="nickname" label="昵称"/>
+        <el-table-column prop="game_id" label="雀魂ID"/>
+        <el-table-column prop="game_name" label="雀魂昵称"/>
       </el-table>
-    </el-container>
-    <el-footer style="margin-top: 20px">
-      <el-button :disabled="$store.state.team_id != 200 && players.length >= 5" type="primary" @click="addVisible = true">添加新队员</el-button>
-    </el-footer>
-    <p style="font-size: 18px; color: #303133">出场顺序管理</p>
-    <el-container v-loading="positionLoading" style="width: 80%, margin-top: 40px">
-      <el-form :label-position="'left'" label-width="50px">
-        <el-form-item label="先锋">
-          <el-select clearable v-model="xf" placeholder="请选择">
-            <el-option v-for="player in players" :key="player.id" :label="player.name" :value="player.name" :disabled="player.disabled" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="中坚">
-          <el-select clearable v-model="zj" placeholder="请选择">
-            <el-option v-for="player in players" :key="player.id" :label="player.name" :value="player.name" :disabled="player.disabled" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="大将">
-          <el-select clearable v-model="dj" placeholder="请选择">
-            <el-option v-for="player in players" :key="player.id" :label="player.name" :value="player.name" :disabled="player.disabled" />
-          </el-select>
-        </el-form-item>
-      </el-form>
-      <el-footer>
-        <el-button type="primary" @click="submit_position" :disabled="!(xf !== '' && zj !== '' && dj !== '')">提交上场次序</el-button>
+      <el-footer style="margin-top: 20px">
+        <el-button @click="open" :disabled="players.length >= 11" type="primary">添加新队员</el-button>
       </el-footer>
     </el-container>
-
-    <el-dialog title="添加队员" :visible.sync="addVisible">
-      <el-form style="margin: 0px 20px" v-loading="addLoading">
-        <el-form-item label="队员ID">
-          <el-input type="number" v-model="add_id"></el-input>
-        </el-form-item>
-        <el-button type="primary" @click="add_players">确定</el-button>
-        <el-button @click="addVisible = false">取消</el-button>
-      </el-form>
-    </el-dialog>
   </div>
 </template>
 
@@ -79,6 +47,25 @@ export default {
     }
   },
   methods: {
+    open() {
+       this.$confirm('确定要添加新队员吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      }).then(() => {
+        axios.get('http://47.100.50.175:8088/api/admin/apply', {
+        headers: { Authorization: this.$store.state.jwt }
+        }).then(response => {
+          this.$alert('用户名：' + response.data.username + '   密码：' + response.data.password, '添加完毕',
+          {
+            confirmButtonText: '确定'
+          })
+          this.getList();
+        })
+      }).catch(() => {
+
+      });
+    },
     setDisabled(p, k) {
       for (let player of this.players) {
         if (p === player.name) {
@@ -90,28 +77,12 @@ export default {
       }
     },
     getList() {
-      axios
-      .get(
-        "http://47.100.50.175:8088/api/public/get_players?id=" +
-          this.$store.state.team_id
-      )
-      .then(response => {
-        this.players = response.data.players;
+      axios.get('http://47.100.50.175:8088/api/admin/get', {
+        headers: { Authorization: this.$store.state.jwt }
+      }).then(response => {
+        console.log(response)
+        this.players = response.data;
         this.loading = false;
-        for (let player of this.players) {
-          if (player.position === 0) {
-            this.xf = player.name
-          } else if (player.position === 1) {
-            this.zj = player.name
-          } else if (player.position === 2) {
-            this.dj = player.name
-          }
-          if (player.leader === true) {
-            player.leader = "队长";
-          } else {
-            player.leader = "队员";
-          }
-        }
       });
     },
     add_players() {
