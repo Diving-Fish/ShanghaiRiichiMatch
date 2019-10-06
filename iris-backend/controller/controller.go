@@ -19,7 +19,8 @@ type JSON map[string]interface{}
 
 type Player struct {
 	ID		int
-	Name	string
+	GameID	int
+	GameName	string
 	Nickname string
 	School  string
 	Sid		int
@@ -115,8 +116,8 @@ func Bind(ctx iris.Context) {
 		})
 		return
 	}
-	player.ID = int(j["id"].(float64))
-	player.Name = j["name"].(string)
+	player.GameID = int(j["id"].(float64))
+	player.GameName = j["name"].(string)
 	db.Save(&player)
 	_, _ = ctx.JSON(JSON{
 		"msg": "success",
