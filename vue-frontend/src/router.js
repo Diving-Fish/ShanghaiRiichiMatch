@@ -62,7 +62,6 @@ router.beforeEach((to, _from, next) => {
     axios.get('http://47.100.50.175:8088/api/player/status', {
       headers: { Authorization: store.state.jwt }
     }).then(response => {
-      console.log(response)
       store.commit('set_school', response.data.school)
       store.commit('set_sid', response.data.sid)
       next()

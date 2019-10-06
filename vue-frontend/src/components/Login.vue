@@ -34,16 +34,17 @@ export default {
   },
   methods: {
     onSubmit() {
-        axios.post('http://47.100.50.175:8088/api/public/login', {
-            "username": this.form.username,
-            "password": this.form.password
-        }).then(response => {
-            this.$store.commit('set_jwt', response.data.token)
-            this.$message.success('登录成功，正在为您跳转...')
-            this.$router.push('/manage')
-        }).catch(() => {
-            this.$message.error('ID或密码错误')
-        })
+      axios.post('http://47.100.50.175:8088/api/public/login', {
+          "username": this.form.username,
+          "password": this.form.password
+      }).then(response => {
+          this.$store.commit('set_jwt', response.data.token)
+          this.$message.success('登录成功，正在为您跳转...')
+          this.$router.push('/manage')
+          this.$router.push('/login')
+      }).catch(() => {
+          this.$message.error('ID或密码错误')
+      })
     }
   }
 };
