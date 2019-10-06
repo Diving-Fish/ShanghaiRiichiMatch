@@ -59,27 +59,26 @@ const router = new Router({
 
 router.beforeEach((to, _from, next) => {
   if (to.path == '/manage') {
-    axios.get('http://47.100.50.175:8088/api/player/stat', {
+    axios.get('http://47.100.50.175:8088/api/player/status', {
       headers: { Authorization: store.state.jwt }
     }).then(response => {
-      store.commit('set_team_id', response.data.team_id)
+      console.log(response)
+      store.commit('set_school', response.data.school)
+      store.commit('set_sid', response.data.sid)
       next()
     }).catch(() => {
       next('/login')
     })
   } else if (to.path == '/login') {
-    axios.get('http://47.100.50.175:8088/api/team/stat', {
+    axios.get('http://47.100.50.175:8088/api/player/status', {
       headers: { Authorization: store.state.jwt }
     }).then(response => {
-      store.commit('set_team_id', response.data.team_id)
+      store.commit('set_school', response.data.school)
+      store.commit('set_sid', response.data.sid)
       next('/manage')
     }).catch(() => {
       next()
     })
-  } else if (to.path == '/admin') {
-    axios.get('http://47.100.50.175:8088/api/admin/stat', {
-      headers: { Authorization: store.state.admin_key }
-    }).then(() => next()).catch(() => next('/'))
   }
   next()
 })

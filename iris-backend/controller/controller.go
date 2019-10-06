@@ -46,6 +46,22 @@ func AdminHandler(ctx iris.Context) {
 	ctx.Next()
 }
 
+func GetPlayers(ctx iris.Context) {
+	school := ctx.Values().GetString("school")
+	var players []Player
+	db.Where("school = ?", school).Find(&players)
+	var j []JSON
+	for _, player := range players {
+		j = append(j, JSON{
+			"sid": player.Sid,
+			"nickname": player.Nickname,
+			"game_id": player.GameID,
+			"game_name": player.GameName,
+		})
+	}
+	_, _ = ctx.JSON(j)
+}
+
 func ApplyNewPlayer(ctx iris.Context) {
 	school := ctx.Values().GetString("school")
 	var players []Player

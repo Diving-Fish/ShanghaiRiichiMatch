@@ -20,6 +20,7 @@ func main() {
 	admin := app.Party("/api/admin", controller.AdminHandler).AllowMethods(iris.MethodOptions)
 	{
 		admin.Get("/apply", controller.ApplyNewPlayer)
+		admin.Get("/get", controller.GetPlayers)
 	}
 	player := app.Party("/api/player", controller.AuthHandler).AllowMethods(iris.MethodOptions)
 	{

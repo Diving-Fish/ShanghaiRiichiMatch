@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-page-header @back="$router.push('/')" content="队伍管理"></el-page-header>
+    <el-page-header @back="$router.push('/')" content="管理"></el-page-header>
     <el-container style="width: 80%, margin-top: 40px">
       <el-table :data="players" v-loading="loading">
         <el-table-column prop="id" label="ID" width="150" />
