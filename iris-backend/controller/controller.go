@@ -9,7 +9,9 @@ import (
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/core/errors"
 	"io/ioutil"
+	"math/rand"
 	"net/http"
+	"strconv"
 	"time"
 )
 
@@ -18,6 +20,7 @@ type JSON map[string]interface{}
 type Player struct {
 	ID		int
 	Name	string
+	Nickname string
 	School  string
 	Sid		int
 	Status  int
@@ -27,6 +30,44 @@ type Player struct {
 var db *gorm.DB
 
 // Admin Routers
+
+func AdminHandler(ctx iris.Context) {
+	sid, school := GetSidAndSchool(ctx.GetHeader("Authorization"))
+	if sid != 0 {
+		ctx.StatusCode(iris.StatusUnauthorized)
+		_, _ = ctx.JSON(JSON{
+			"msg": "not admin",
+		})
+		return
+	}
+	ctx.Values().Set("sid", sid)
+	ctx.Values().Set("school", school)
+	ctx.Next()
+}
+
+func ApplyNewPlayer(ctx iris.Context) {
+	school := ctx.Values().GetString("school")
+	var players []Player
+	db.Where("school = ?", school).Find(&players)
+	if len(players) > 10 {
+		ctx.StatusCode(iris.StatusBadRequest)
+		_, _ = ctx.JSON(JSON{
+			"msg": "full team",
+		})
+	}
+	sid := len(players)
+	password := randomPassword()
+	player := Player{
+		School: school,
+		Sid: sid,
+		Password: password,
+	}
+	db.Create(&player)
+	_, _ = ctx.JSON(JSON{
+		"username": stringify(sid, school),
+		"password": password,
+	})
+}
 
 // Player Routers
 
@@ -113,14 +154,15 @@ func ChangePwd(ctx iris.Context) {
 func Login(ctx iris.Context) {
 	j := JSON{}
 	err := ctx.ReadJSON(&j)
-	if err != nil || j["sid"] == nil || j["school"] == nil || j["password"] == nil {
+	if err != nil || j["username"] == nil || j["password"] == nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
 			"msg": "json error",
 		})
 		return
 	}
-	player, err := queryPlayerBySidAndSchool(int(j["sid"].(float64)), j["school"].(string))
+	sid, school := parseString(j["username"].(string))
+	player, err := queryPlayerBySidAndSchool(sid, school)
 	if err != nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
@@ -129,7 +171,7 @@ func Login(ctx iris.Context) {
 		return
 	}
 	if player.Password == j["password"].(string) {
-		token := BuildToken(int(j["sid"].(float64)), j["school"].(string))
+		token := BuildToken(sid, school)
 		_, _ = ctx.JSON(JSON{
 			"token": token,
 		})
@@ -150,6 +192,7 @@ func SearchPlayerById(ctx iris.Context) {
 		_, _ = ctx.JSON(JSON{
 			"msg": "can't find player",
 		})
+		return
 	}
 	_, _ = ctx.JSON(JSON{
 		"name": s,
@@ -179,6 +222,32 @@ func QueryPlayer(ctx iris.Context) {
 }
 
 // Functions
+
+func randomPassword() string {
+	charList := []string {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"}
+	s := ""
+	for i := 0; i < 6; i++ {
+		s += charList[rand.Intn(len(charList))]
+	}
+	return s
+}
+
+func stringify(sid int, school string) string {
+	return fmt.Sprintf("%s%03d", school, sid)
+}
+
+func parseString(s string) (int, string) {
+	var idx int
+	var ch string
+	for idx, ch = range s {
+		if string(ch) == "0" {
+			break
+		}
+	}
+	i, _ := strconv.Atoi(s[idx:])
+	s = s[0:idx]
+	return i, s
+}
 
 func queryPlayerBySidAndSchool(id int, school string) (Player, error) {
 	player := Player{}

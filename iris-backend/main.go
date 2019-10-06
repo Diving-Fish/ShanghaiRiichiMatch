@@ -17,13 +17,10 @@ func main() {
 		ctx.Next()
 	}
 	app.Use(crs)
-	//admin := app.Party("/api/admin", controller.AdminHandler).AllowMethods(iris.MethodOptions)
-	//{
-	//	admin.Get("/fetch_all_players", controller.FetchAllPlayers)
-	//	admin.Get("/delete_team", controller.DeleteTeamAdmin)
-	//	admin.Get("/stat", controller.AdminAuth)
-	//	admin.Get("/get_status", controller.GetAllStatus)
-	//}
+	admin := app.Party("/api/admin", controller.AdminHandler).AllowMethods(iris.MethodOptions)
+	{
+		admin.Get("/apply", controller.ApplyNewPlayer)
+	}
 	player := app.Party("/api/player", controller.AuthHandler).AllowMethods(iris.MethodOptions)
 	{
 		player.Get("/status", controller.Status)
