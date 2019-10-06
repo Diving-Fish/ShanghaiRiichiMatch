@@ -15,14 +15,14 @@ const store = new Vuex.Store({
     admin_key: ''
   },
   mutations: {
-    set_jwt(state, j) {
-      state.jwt = j
+    set_jwt(state, s) {
+      state.jwt = s
     },
-    set_team_id(state, i) {
-      state.team_id = i
+    set_school(state, s) {
+      state.school = s
     },
-    set_admin_key(state, admin_key) {
-      state.admin_key = admin_key
+    set_sid(state, i) {
+      state.sid = i
     }
   }
 })

@@ -1,12 +1,9 @@
 <template>
   <div id="app">
-    <title>联机杯雀魂杯赛</title>
+    <title>2019年上海高校立直麻将个人赛</title>
     <el-container>
       <el-header class="el-header">
-        <a>联机杯雀魂杯赛</a>
-        <ul style="float: right; margin: 0px; font-size: 16px">
-          <el-button round icon="el-icon-setting" @click="admin">超级管理员</el-button>
-        </ul>
+        <a>2019年上海高校立直麻将个人赛</a>
       </el-header>
       <el-container>
         <el-aside>
@@ -17,7 +14,7 @@
               <el-menu-item index="1-2" @click="$router.push('/group')"><a>分组</a></el-menu-item>
               <el-menu-item index="1-3" @click="$router.push('/stat')"><a>统计</a></el-menu-item>
             </el-submenu>
-            <el-menu-item index="2" @click="$router.push('/login')"><i class="el-icon-s-tools"></i><a style="font-size:16px">队伍管理</a></el-menu-item>
+            <el-menu-item index="2" @click="$router.push('/login')"><i class="el-icon-s-tools"></i><a style="font-size:16px">管理</a></el-menu-item>
           </el-menu>
         </el-aside>
         <el-main>
@@ -35,6 +32,9 @@ import axios from 'axios'
 export default {
   name: "app",
   components: {
+  },
+  created: function() {
+    window.document.title = "2019年上海高校立直麻将个人赛"
   },
   methods: {
     admin() {

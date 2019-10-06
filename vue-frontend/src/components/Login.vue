@@ -8,10 +8,10 @@
         label-width="120px"
         style="width: 100%; margin: 40px 40% 0px 20%"
       >
-        <el-form-item label="队伍ID">
-          <el-input v-model="form.id"></el-input>
+        <el-form-item label="用户名">
+          <el-input v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item label="队伍密码">
+        <el-form-item label="密码">
           <el-input type="password" v-model="form.password"></el-input>
         </el-form-item>
         <el-form-item>

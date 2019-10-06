@@ -99,7 +99,7 @@ func Status(ctx iris.Context) {
 func Bind(ctx iris.Context) {
 	j := JSON{}
 	err := ctx.ReadJSON(&j)
-	if err != nil || j["id"] == nil || j["name"] == nil {
+	if err != nil || j["id"] == nil || j["game_name"] == nil || j["nickname"] == nil {
 		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
 			"msg": "json error",
@@ -117,7 +117,8 @@ func Bind(ctx iris.Context) {
 		return
 	}
 	player.GameID = int(j["id"].(float64))
-	player.GameName = j["name"].(string)
+	player.GameName = j["game_name"].(string)
+	player.Nickname = j["nickname"].(string)
 	db.Save(&player)
 	_, _ = ctx.JSON(JSON{
 		"msg": "success",
