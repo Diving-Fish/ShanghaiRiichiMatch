@@ -54,6 +54,7 @@ func ApplyNewPlayer(ctx iris.Context) {
 		_, _ = ctx.JSON(JSON{
 			"msg": "full team",
 		})
+		return
 	}
 	sid := len(players)
 	password := randomPassword()
@@ -107,7 +108,7 @@ func Bind(ctx iris.Context) {
 	sid, _ := ctx.Values().GetInt("sid")
 	school := ctx.Values().GetString("school")
 	player, err := queryPlayerBySidAndSchool(sid, school)
-	if err != nil {
+	if err != nil || sid == 0 {
 		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
 			"msg": "player info error",
