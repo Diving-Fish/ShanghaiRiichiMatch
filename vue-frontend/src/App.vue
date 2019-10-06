@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <title>2019年上海高校立直麻将个人赛</title>
     <el-container>
       <el-header class="el-header">
-        <a>2019年上海高校立直麻将个人赛</a>
+        <a>第三届魔都日麻高校个人赛</a>
       </el-header>
       <el-container>
         <el-aside>
