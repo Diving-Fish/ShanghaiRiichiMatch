@@ -238,7 +238,7 @@ func stringify(sid int, school string) string {
 
 func parseString(s string) (int, string) {
 	var idx int
-	var ch string
+	var ch rune
 	for idx, ch = range s {
 		if string(ch) == "0" {
 			break
