@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a9527bd3-fa15-4405-9e85-194714d14907" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../iris-backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../iris-backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../vue-frontend/src/components/Manage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vue-frontend/src/components/Manage.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sendmail.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.a">
+  <component name="RunManager" selected="Python.sendmail">
     <configuration name="a" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="majsoul-backend-python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -65,6 +65,28 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/a.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sendmail" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="majsoul-backend-python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sendmail.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -97,6 +119,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.sendmail" />
         <item itemvalue="Python.a" />
         <item itemvalue="Python.snapshot" />
       </list>
@@ -124,6 +147,7 @@
       <workItem from="1570203103541" duration="125000" />
       <workItem from="1570203453810" duration="746000" />
       <workItem from="1570348867706" duration="2574000" />
+      <workItem from="1570379856992" duration="458000" />
     </task>
     <servers />
   </component>
@@ -158,5 +182,6 @@
     <SUITE FILE_PATH="coverage/majsoul_backend_python$a.coverage" NAME="a Coverage Results" MODIFIED="1565602869165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/majsoul_backend_python$snapshot.coverage" NAME="snapshot Coverage Results" MODIFIED="1566647454359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$a.coverage" NAME="a Coverage Results" MODIFIED="1570352761429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask$sendmail.coverage" NAME="sendmail Coverage Results" MODIFIED="1570380366084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

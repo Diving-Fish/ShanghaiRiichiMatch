@@ -34,7 +34,7 @@ export default {
   components: {
   },
   created: function() {
-    window.document.title = "2019年上海高校立直麻将个人赛"
+    window.document.title = "第三届魔都日麻高校个人赛"
   },
   methods: {
     admin() {
