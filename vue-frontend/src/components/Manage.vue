@@ -44,7 +44,7 @@
           style="width: 40%; margin: 0px 0px 0px 20px"
         >
         <el-form-item style="margin-bottom: 0px" label="学校">
-          <span>{{ stat.school }}</span>
+          <span>{{ school_map.get(stat.school) }}</span>
         </el-form-item>
         <el-form-item style="margin-bottom: 0px" label="昵称">
           <span>{{ stat.nickname }}</span>
@@ -82,6 +82,28 @@ import axios from "axios";
 export default {
   data() {
     return {
+      school_map: new Map([
+        ['ECNU', '华东师范大学'],
+        ['SISU', '上海外国语大学'],
+        ['FDU', '复旦大学'],
+        ['SHU', '上海大学'],
+        ['SHMTU','上海海事大学'],
+        ['SUIBE','上海对外经贸大学'],
+        ['SIT','上海应用技术大学'],
+        ['SUES','上海工程技术大学'],
+        ['SUFE','上海财经大学'],
+        ['USST','上海理工大学'],
+        ['ZJU','浙江大学'],
+        ['SHUPL','上海政法学院'],
+        ['ECUPL','华东政法大学'],
+        ['LIXIN','上海立信会计金融学院'],
+        ['SHUEP','上海电力大学'],
+        ['NJU','南京大学'],
+        ['ECUST','华东理工大学'],
+        ['SHOU','上海海洋大学'],
+        ['SHNU','上海师范大学'],
+        ['SJTU','上海交通大学'],
+      ]),
       loading: false,
       players: [],
       stat: {},
