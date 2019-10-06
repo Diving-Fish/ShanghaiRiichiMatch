@@ -35,7 +35,7 @@ export default {
   methods: {
     onSubmit() {
         axios.post('http://47.100.50.175:8088/api/public/login', {
-            "id": parseInt(this.form.id),
+            "username": this.form.username,
             "password": this.form.password
         }).then(response => {
             this.$store.commit('set_jwt', response.data.token)

@@ -176,6 +176,8 @@ func Login(ctx iris.Context) {
 	if player.Password == j["password"].(string) {
 		token := BuildToken(sid, school)
 		_, _ = ctx.JSON(JSON{
+			"sid": sid,
+			"school": school,
 			"token": token,
 		})
 	} else {
