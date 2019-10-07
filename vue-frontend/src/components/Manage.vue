@@ -7,6 +7,12 @@
         <el-table-column prop="nickname" label="昵称"/>
         <el-table-column prop="game_id" label="雀魂ID"/>
         <el-table-column prop="game_name" label="雀魂昵称"/>
+        <el-table-column label="绑定情况">
+          <template slot-scope="scope">
+            <a v-if="scope.row.bound" style="cursor: pointer" @click="reset(scope.row.sid)">已绑定，点击重置</a>
+            <a v-if="!scope.row.bound">未绑定，密码为{{scope.row.password}}</a>
+          </template>
+        </el-table-column>
       </el-table>
       <el-footer style="margin-top: 20px">
         <el-button @click="open" :disabled="players.length >= 11" type="primary">添加新队员</el-button>
@@ -103,6 +109,8 @@ export default {
         ['SHOU','上海海洋大学'],
         ['SHNU','上海师范大学'],
         ['SJTU','上海交通大学'],
+        ['SDJU','上海电机学院'],
+        ['DHU','东华大学']
       ]),
       loading: false,
       players: [],
@@ -177,6 +185,19 @@ export default {
       }).catch(() => {
         this.$message.error('未知错误')
       })
+    },
+    reset(sid) {
+      axios.get('http://47.100.50.175:8088/api/admin/reset?sid=' + sid, {
+        headers: { Authorization: this.$store.state.jwt }
+      }).then(response => {
+        this.$alert('用户名：' + response.data.username + '   密码：' + response.data.password, '重置完毕',
+        {
+          confirmButtonText: '确定'
+        })
+        this.getList();
+      }).catch(() => {
+
+      });
     },
     cpwdSubmit() {
       axios.post('http://47.100.50.175:8088/api/player/change_pwd', {

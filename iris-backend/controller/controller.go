@@ -52,7 +52,7 @@ func GetPlayers(ctx iris.Context) {
 	db.Where("school = ?", school).Find(&players)
 	var j []JSON
 	for _, player := range players {
-		bound := player.Nickname == ""
+		bound := player.Nickname != ""
 		ele := JSON{
 			"sid": player.Sid,
 			"bound": bound,
@@ -86,6 +86,7 @@ func ResetPlayer(ctx iris.Context) {
 	player.Password = randomPassword()
 	db.Save(&player)
 	_, _ = ctx.JSON(JSON{
+		"username": stringify(player.Sid, school),
 		"password": player.Password,
 	})
 }
