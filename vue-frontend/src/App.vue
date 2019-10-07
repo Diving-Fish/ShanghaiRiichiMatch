@@ -10,8 +10,9 @@
             <el-submenu index="1">
               <template slot="title"><i class="el-icon-menu"></i><a style="font-size:16px">比赛信息</a></template>
               <el-menu-item index="1-1" @click="$router.push('/')"><a>概况</a></el-menu-item>
-              <el-menu-item index="1-2" @click="$router.push('/group')"><a>分组</a></el-menu-item>
-              <el-menu-item index="1-3" @click="$router.push('/stat')"><a>统计</a></el-menu-item>
+              <el-menu-item index="1-2" @click="$router.push('/players')"><a>名单</a></el-menu-item>
+              <el-menu-item index="1-3" @click="$router.push('/group')"><a>分组</a></el-menu-item>
+              <el-menu-item index="1-4" @click="$router.push('/stat')"><a>统计</a></el-menu-item>
             </el-submenu>
             <el-menu-item index="2" @click="$router.push('/login')"><i class="el-icon-s-tools"></i><a style="font-size:16px">管理</a></el-menu-item>
           </el-menu>

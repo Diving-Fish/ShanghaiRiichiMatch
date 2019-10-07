@@ -203,6 +203,20 @@ func ChangePwd(ctx iris.Context) {
 
 // Public Routers
 
+func FindAll(ctx iris.Context) {
+	var players []Player
+	var j []JSON
+	db.Where("nickname != '' and sid != 0").Find(&players)
+	for _, p := range players {
+		j = append(j, JSON{
+			"school": p.School,
+			"nickname": p.Nickname,
+			"game_name": p.GameName,
+		})
+	}
+	_, _ = ctx.JSON(j)
+}
+
 func Login(ctx iris.Context) {
 	j := JSON{}
 	err := ctx.ReadJSON(&j)

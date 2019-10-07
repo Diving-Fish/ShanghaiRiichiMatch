@@ -111,7 +111,9 @@ export default {
         ['SHNU','上海师范大学'],
         ['SJTU','上海交通大学'],
         ['SDJU','上海电机学院'],
-        ['DHU','东华大学']
+        ['DHU','东华大学'],
+        ['SEU','东南大学'],
+        ['BUAA','学院路联合大学']
       ]),
       loading: false,
       players: [],

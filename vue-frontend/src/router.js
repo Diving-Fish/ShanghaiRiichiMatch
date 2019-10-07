@@ -7,6 +7,7 @@ import Manage from './components/Manage.vue'
 import Admin from './components/Admin.vue'
 import Stat from './components/Stat.vue'
 import Admin2 from './components/Admin2.vue'
+import Players from './components/Players.vue'
 import axios from 'axios'
 import store from './main'
 
@@ -53,6 +54,11 @@ const router = new Router({
       path: "/stat",
       name: "stat",
       component: Stat
+    },
+    {
+      path: "/players",
+      name: "players",
+      component: Players
     }
   ]
 })
