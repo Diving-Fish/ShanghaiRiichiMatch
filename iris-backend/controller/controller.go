@@ -52,14 +52,42 @@ func GetPlayers(ctx iris.Context) {
 	db.Where("school = ?", school).Find(&players)
 	var j []JSON
 	for _, player := range players {
-		j = append(j, JSON{
+		bound := player.Nickname == ""
+		ele := JSON{
 			"sid": player.Sid,
+			"bound": bound,
 			"nickname": player.Nickname,
 			"game_id": player.GameID,
 			"game_name": player.GameName,
-		})
+		}
+		if !bound {
+			ele["password"] = player.Password
+		}
+		j = append(j, ele)
 	}
 	_, _ = ctx.JSON(j)
+}
+
+func ResetPlayer(ctx iris.Context) {
+	id, err := ctx.URLParamInt("sid")
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		_, _ = ctx.JSON(JSON{
+			"msg": "json error",
+		})
+		return
+	}
+	school := ctx.Values().GetString("school")
+	player := Player{}
+	db.Where("school = ? and sid = ?", school, id).First(&player)
+	player.GameID = 0
+	player.GameName = ""
+	player.Nickname = ""
+	player.Password = randomPassword()
+	db.Save(&player)
+	_, _ = ctx.JSON(JSON{
+		"password": player.Password,
+	})
 }
 
 func ApplyNewPlayer(ctx iris.Context) {

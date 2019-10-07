@@ -21,6 +21,7 @@ func main() {
 	{
 		admin.Get("/apply", controller.ApplyNewPlayer)
 		admin.Get("/get", controller.GetPlayers)
+		admin.Get("/reset", controller.ResetPlayer)
 	}
 	player := app.Party("/api/player", controller.AuthHandler).AllowMethods(iris.MethodOptions)
 	{
