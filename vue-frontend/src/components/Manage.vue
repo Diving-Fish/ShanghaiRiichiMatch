@@ -9,8 +9,9 @@
         <el-table-column prop="game_name" label="雀魂昵称"/>
         <el-table-column label="绑定情况">
           <template slot-scope="scope">
-            <a v-if="scope.row.bound" style="cursor: pointer" @click="reset(scope.row.sid)">已绑定，点击重置</a>
-            <a v-if="!scope.row.bound">未绑定，密码为{{scope.row.password}}</a>
+            <a v-if="scope.row.sid == 0">工具人是不用绑定的（大雾）</a>
+            <a v-if="scope.row.sid != 0 && scope.row.bound" style="cursor: pointer" @click="reset(scope.row.sid)">已绑定，点击重置</a>
+            <a v-if="scope.row.sid != 0 && !scope.row.bound">未绑定，密码为{{scope.row.password}}</a>
           </template>
         </el-table-column>
       </el-table>
@@ -187,16 +188,22 @@ export default {
       })
     },
     reset(sid) {
-      axios.get('http://47.100.50.175:8088/api/admin/reset?sid=' + sid, {
-        headers: { Authorization: this.$store.state.jwt }
-      }).then(response => {
-        this.$alert('用户名：' + response.data.username + '   密码：' + response.data.password, '重置完毕',
-        {
-          confirmButtonText: '确定'
-        })
-        this.getList();
-      }).catch(() => {
+      this.$confirm('确定要重置该队员吗？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'info'
+      }).then(() => {
+        axios.get('http://47.100.50.175:8088/api/admin/reset?sid=' + sid, {
+          headers: { Authorization: this.$store.state.jwt }
+        }).then(response => {
+          this.$alert('用户名：' + response.data.username + '   密码：' + response.data.password, '重置完毕',
+          {
+            confirmButtonText: '确定'
+          })
+          this.getList();
+        }).catch(() => {
 
+        });
       });
     },
     cpwdSubmit() {
