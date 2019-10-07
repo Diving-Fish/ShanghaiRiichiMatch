@@ -153,7 +153,7 @@ export default {
         this.form.game_name = response.data.name
         this.loading = false;
       }).catch(() => {
-        this.$message.error('未找到该玩家')
+        this.$message.error('未找到该玩家（或者是服务器开小差了……）')
       })
     },
     open() {
