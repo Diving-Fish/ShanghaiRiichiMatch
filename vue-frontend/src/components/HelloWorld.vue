@@ -95,7 +95,8 @@ export default {
         {school: "东华大学", nickname: "梦境无恒", qq: "862919793"},
         {school: "上海电机学院", nickname: "树哥", qq: "1067668604"},
         {school: "学院路联合大学", nickname: "小弓"},
-        {school: "东南大学", nickname:"Mew's"}
+        {school: "东南大学", nickname:"Mew's"},
+        {school: "同济大学", nickname:"中张"}
       ]
     }
   },
