@@ -1,10 +1,12 @@
 <template>
-  <p style="margin: 20px">已报名选手数量：{{ players.length }}</p>
-  <el-table :data="players" v-loading="loading" :default-sort = "{prop: 'school', order: 'ascending'}">
-    <el-table-column prop="school" label="学校" sortable />
-    <el-table-column prop="nickname" label="昵称" />
-    <el-table-column prop="game_name" label="雀魂昵称" />
-  </el-table>
+  <div>
+    <p style="margin: 20px">已报名选手数量：{{ players.length }}</p>
+    <el-table :data="players" v-loading="loading" :default-sort = "{prop: 'school', order: 'ascending'}">
+      <el-table-column prop="school" label="学校" sortable />
+      <el-table-column prop="nickname" label="昵称" />
+      <el-table-column prop="game_name" label="雀魂昵称" />
+    </el-table>
+  </div>
 </template>
 
 <script>
