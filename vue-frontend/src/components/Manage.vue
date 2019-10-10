@@ -114,7 +114,8 @@ export default {
         ['DHU','东华大学'],
         ['SEU','东南大学'],
         ['BUAA','学院路联合大学'],
-        ['TJU','同济大学']
+        ['TJU','同济大学'],
+        ['STU','上海科技大学']
       ]),
       loading: false,
       players: [],
