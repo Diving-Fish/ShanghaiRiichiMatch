@@ -15,33 +15,33 @@
       <p><a style="color: red">每所高校最多能报名10人</a>（参赛选手须是所在高校的在校生或是毕业生，本次比赛不限制毕业生数量），负责人账号无法参加比赛。若负责人想参加比赛，请自行创建一个新的比赛账号。</p> 
       <p>参赛学校及负责人名单：</p>
       <div style="display: flex">
-        <el-table
-          :data="schools.slice(0,13)"
-          style="margin-left: 20px">
-          <el-table-column
-            prop="school"
-            label="学校"
-            width="240">
-          </el-table-column>
-          <el-table-column
-            prop="nickname"
-            label="负责人昵称"
-            width="240">
-          </el-table-column>
-        </el-table>
-        <el-table
-          :data="schools.slice(13,25)">
-          <el-table-column
-            prop="school"
-            label="学校"
-            width="240">
-          </el-table-column>
-          <el-table-column
-            prop="nickname"
-            label="负责人昵称"
-            width="240">
-          </el-table-column>
-        </el-table>
+        <div style="width: 500px">
+          <el-table
+            :data="schools.slice(0,13)"
+            style="margin-left: 20px">
+            <el-table-column
+              prop="school"
+              label="学校">
+            </el-table-column>
+            <el-table-column
+              prop="nickname"
+              label="负责人昵称">
+            </el-table-column>
+          </el-table>
+        </div>
+        <div style="margin-left: 20px; width: 500px">
+          <el-table
+            :data="schools.slice(13,25)">
+            <el-table-column
+              prop="school"
+              label="学校">
+            </el-table-column>
+            <el-table-column
+              prop="nickname"
+              label="负责人昵称">
+            </el-table-column>
+          </el-table>
+        </div>
       </div>
       <p>关于报名相关疑问请找本次主办：水鱼(QQ：2300756578)进行咨询。</p>
       <h2>3.	赛程及赛制</h2>
