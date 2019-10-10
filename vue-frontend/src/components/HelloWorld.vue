@@ -13,21 +13,36 @@
       <p>各高校队员联系高校负责人进行报名，截止日期为10月21日00:00。</p> 
       <p>负责人使用负责人账号（稍后将发送到各负责人的邮箱）登录后，进入网站管理界面——添加新队员，即可创建一个空的比赛账号。选手登录比赛账号后，进行信息填写即可正常参与比赛。请您注意修改初始密码，并保管好您的账号密码。</p> 
       <p><a style="color: red">每所高校最多能报名10人</a>（参赛选手须是所在高校的在校生或是毕业生，本次比赛不限制毕业生数量），负责人账号无法参加比赛。若负责人想参加比赛，请自行创建一个新的比赛账号。</p> 
-      <p>参赛学校及负责人名单：</p> 
-      <el-table
-        :data="schools"
-        style="margin-left: 20px; width: 480px">
-        <el-table-column
-          prop="school"
-          label="学校"
-          width="240">
-        </el-table-column>
-        <el-table-column
-          prop="nickname"
-          label="负责人昵称"
-          width="240">
-        </el-table-column>
-      </el-table>
+      <p>参赛学校及负责人名单：</p>
+      <div style="display: flex">
+        <el-table
+          :data="schools.slice(0,13)"
+          style="margin-left: 20px">
+          <el-table-column
+            prop="school"
+            label="学校"
+            width="240">
+          </el-table-column>
+          <el-table-column
+            prop="nickname"
+            label="负责人昵称"
+            width="240">
+          </el-table-column>
+        </el-table>
+        <el-table
+          :data="schools.slice(13,25)">
+          <el-table-column
+            prop="school"
+            label="学校"
+            width="240">
+          </el-table-column>
+          <el-table-column
+            prop="nickname"
+            label="负责人昵称"
+            width="240">
+          </el-table-column>
+        </el-table>
+      </div>
       <p>关于报名相关疑问请找本次主办：水鱼(QQ：2300756578)进行咨询。</p>
       <h2>3.	赛程及赛制</h2>
       <p>预选：</p>
@@ -62,17 +77,6 @@
       <p>5-8：雀魂月卡两个月(可折现50)+奖池自选一</p>
       <p>9-12：雀魂月卡一个月(可折现25)+奖池自选一</p>
       <p>13-16：雀魂月卡一个月(可折现25)</p>
-      <h3>奖池列表</h3>
-      <p>1. 大洋化学 AMOS MAX 麻将+台布+手册 X 1</p>
-      <p>2. 大洋化学 AMOS GABIN 麻将 X 1</p>
-      <p>3. 大洋化学 麻将桌布 台布 桌垫 JUNKMAT X 1</p>
-      <p>4. 大富翁10 steam游戏 X 1</p>
-      <p>5. 剧毒少女 秋季例大祭第六回新刊 X 1</p>
-      <p>6. 瓦西子透明麻将 X 2</p>
-      <p>7. 雀魂官方吧唧全套 X 2</p>
-      <p>8. 天麻小挂画 X 4</p>
-      <p>9. 麻将博物馆定制 麻将扑克牌 X N</p>
-      <p>10. 大洋化学 白彩色筹码 彩色点棒 X N</p>
       <h2>6.	其他</h2>
       <p>本次比赛严禁任何不正打行为，包括但不限于代打、通牌，一经发现，立即取消该选手比赛资格。</p> 
       <p>报名/比赛过程中若有任何疑问，可以联系各高校负责人，或联系主办水鱼（QQ:2300756578），有赞助想法请联系安然（QQ:513696293)。</p>
@@ -103,6 +107,17 @@
       <p><a href="https://live.bilibili.com/99349/">肖教练</a>(复旦精神支柱，打牌极限的求道派新晋凤凰，B站直播间：99349)</p>
       <p><a href="https://live.bilibili.com/21555096/">璃亚</a>(VTuber，FreedomZone动漫协会看板娘，B站直播间: 21555096)</p>
       <p>......</p>
+      <h2>奖池列表</h2>
+      <p>1. 大洋化学 AMOS MAX 麻将+台布+手册 X 1</p>
+      <p>2. 大洋化学 AMOS GABIN 麻将 X 1</p>
+      <p>3. 大洋化学 麻将桌布 台布 桌垫 JUNKMAT X 1</p>
+      <p>4. 大富翁10 steam游戏 X 1</p>
+      <p>5. 剧毒少女 秋季例大祭第六回新刊 X 1</p>
+      <p>6. 瓦西子透明麻将 X 2</p>
+      <p>7. 雀魂官方吧唧全套 X 2</p>
+      <p>8. 天麻小挂画 X 4</p>
+      <p>9. 麻将博物馆定制 麻将扑克牌 X N</p>
+      <p>10. 大洋化学 白彩色筹码 彩色点棒 X N</p>
       <p>以及海选阶段会被淘汰的N名谐星。</p>
     </div>
   </div>
@@ -125,6 +140,7 @@ export default {
         {school: "上海理工大学", nickname: "鸡腿", qq: "982919014"},
         {school: "浙江大学", nickname: "Sapphire ", qq: "1035627110"},
         {school: "上海政法学院", nickname: "T妹", qq: "844768831"},
+        {school: "学院路联合大学", nickname: "小弓"},
         {school: "华东政法大学", nickname: "清风沐璃", qq: "2258349120"},
         {school: "上海立信会计金融学院", nickname: "哲学", qq: "1005536376"},
         {school: "上海电力大学", nickname: "qb", qq: "1499227861"},
@@ -134,7 +150,6 @@ export default {
         {school: "上海师范大学", nickname: "未来", qq: "974020665"},
         {school: "上海交通大学", nickname: "水鱼", qq: "2300756578"},
         {school: "东华大学", nickname: "梦境无恒", qq: "862919793"},
-        {school: "学院路联合大学", nickname: "小弓"},
         {school: "东南大学", nickname:"Mew's"},
         {school: "同济大学", nickname:"中张"},
         {school: "上海科技大学", nickname:"叉子"}
