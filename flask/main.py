@@ -21,7 +21,7 @@ driver.find_element_by_id('password').send_keys('Dfyshisb123')
 sleep(0.5)
 driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div/div/div[2]/div/form/div[3]/button').click()
 sleep(2)
-driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/ul/li[2]/div/div[5]/a/button').click()
+driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/ul/li/div/div[5]/a/button').click()
 
 
 def _get_name(user_id):
