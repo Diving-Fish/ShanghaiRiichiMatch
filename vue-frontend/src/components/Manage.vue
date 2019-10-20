@@ -10,7 +10,7 @@
         <el-table-column label="绑定情况">
           <template slot-scope="scope">
             <a v-if="scope.row.sid == 0">工具人是不用绑定的（大雾）</a>
-            <a v-if="scope.row.sid != 0 && scope.row.bound" style="cursor: pointer">已绑定</a>
+            <a v-if="scope.row.sid != 0 && scope.row.bound">已绑定</a>
             <a v-if="scope.row.sid != 0 && !scope.row.bound">未绑定，密码为{{scope.row.password}}</a>
           </template>
         </el-table-column>
