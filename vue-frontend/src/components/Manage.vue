@@ -16,7 +16,7 @@
         </el-table-column>
       </el-table>
       <el-footer style="margin-top: 20px">
-        <el-button @click="open" type="primary">报名入口已关闭</el-button>
+        <el-button @click="open" type="primary" :disabled="true">报名入口已关闭</el-button>
       </el-footer>
     </el-container>
     <div v-if="$store.state.sid != 0 && stat.game_id == 0">
