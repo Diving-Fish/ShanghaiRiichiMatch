@@ -10,13 +10,13 @@
         <el-table-column label="绑定情况">
           <template slot-scope="scope">
             <a v-if="scope.row.sid == 0">工具人是不用绑定的（大雾）</a>
-            <a v-if="scope.row.sid != 0 && scope.row.bound" style="cursor: pointer" @click="reset(scope.row.sid)">已绑定，点击重置</a>
+            <a v-if="scope.row.sid != 0 && scope.row.bound" style="cursor: pointer">已绑定</a>
             <a v-if="scope.row.sid != 0 && !scope.row.bound">未绑定，密码为{{scope.row.password}}</a>
           </template>
         </el-table-column>
       </el-table>
       <el-footer style="margin-top: 20px">
-        <el-button @click="open" :disabled="players.length >= 11" type="primary">添加新队员</el-button>
+        <el-button @click="open" type="primary">报名入口已关闭</el-button>
       </el-footer>
     </el-container>
     <div v-if="$store.state.sid != 0 && stat.game_id == 0">
