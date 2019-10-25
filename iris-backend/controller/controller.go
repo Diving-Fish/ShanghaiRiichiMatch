@@ -429,4 +429,7 @@ func init() {
 	if !db.HasTable(&Player{}) {
 		db.CreateTable(&Player{})
 	}
+	if !db.HasTable(&Score{}) {
+		db.CreateTable(&Score{})
+	}
 }
