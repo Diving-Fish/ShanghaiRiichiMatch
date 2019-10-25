@@ -27,6 +27,7 @@ import axios from "axios";
 export default {
   data() {
     return {
+      loading: false,
       round: 1,
       data: [],
       school_map: new Map([
@@ -93,8 +94,8 @@ export default {
     }
   },
   created: function() {
+    this.loading = true;
     axios.get("http://47.100.50.175:8088/api/public/all_scores?round=1").then(response => {
-      console.log(response)
       let d = response.data
       for (let ob of d) {
         ob.school = this.school_map.get(ob.school)
@@ -116,6 +117,7 @@ export default {
         rank += 1;
       }
       this.data = d;
+      this.loading = false
     })
   }
 }
