@@ -10,13 +10,20 @@
         <el-table-column prop="school" min-width="120" label="学校" />
         <el-table-column prop="nick_name" min-width="120" label="昵称" />
         <el-table-column prop="game_name" min-width="120" label="雀魂昵称" />
-        <el-table-column prop="s0" label="马点1" />
-        <el-table-column prop="s1" label="马点2" />
-        <el-table-column prop="s2" label="马点3" />
-        <el-table-column prop="s3" label="马点4" />
-        <el-table-column prop="s4" label="马点5" />
-        <el-table-column prop="s5" label="马点6" />
-        <el-table-column prop="s" label="总马点" sortable />
+        <el-table-column v-for="a in [1,2,3,4,5,6]" :key="a" :label="'马点' + a" >
+          <template slot-scope="scope">
+            <a v-if="scope.row.scores[a - 1] > 0" style="color: #00aa00">+{{scope.row.scores[a - 1]}}</a>
+            <a v-if="scope.row.scores[a - 1] < 0" style="color: #ff5555">{{scope.row.scores[a - 1]}}</a>
+            <a v-if="scope.row.scores[a - 1] == 0">{{scope.row.scores[a - 1]}}</a>
+          </template>
+        </el-table-column>
+        <el-table-column prop="s" label="总马点">
+          <template slot-scope="scope">
+            <a v-if="scope.row.s > 0" style="color: green">+{{scope.row.s}}</a>
+            <a v-if="scope.row.s < 0" style="color: red">{{scope.row.s}}</a>
+            <a v-if="scope.row.s == 0">{{scope.row.s}}</a>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
   </div>
