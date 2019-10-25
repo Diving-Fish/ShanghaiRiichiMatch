@@ -4,7 +4,7 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
-from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import InvalidSessionIdException
 from selenium.common.exceptions import WebDriverException
 
 
@@ -115,27 +115,31 @@ def start_match():
 def get_now_info():
     if G.lock:
         return "busy"
-    G.lock = True
-    driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[3]').click()
-    sleep(0.2)
-    index = 1
-    ready = []
-    playing = []
-    while True:
-        try:
-            ready.append(driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/div/div[1]/div[1]/div[2]/ul/li[%d]' % index).text)
-            index += 1
-        except NoSuchElementException:
-            break
-    index = 1
-    while True:
-        try:
-            l = []
-            for i in range(1, 4):
-                l.append(driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/div/div[2]/div[%d]/div/ul/li[%d]/div/span' % (index, i)).text)
-            playing.append(l)
-            index += 1
-        except NoSuchElementException:
-            break
-    G.lock = False
-    return {"ready": ready, "playing": playing}
+    try:
+        G.lock = True
+        driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[3]').click()
+        sleep(0.2)
+        index = 1
+        ready = []
+        playing = []
+        while True:
+            try:
+                ready.append(driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/div/div[1]/div[1]/div[2]/ul/li[%d]' % index).text)
+                index += 1
+            except NoSuchElementException:
+                break
+        index = 1
+        while True:
+            try:
+                l = []
+                for i in range(1, 4):
+                    l.append(driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/div/div[2]/div[%d]/div/ul/li[%d]/div/span' % (index, i)).text)
+                playing.append(l)
+                index += 1
+            except NoSuchElementException:
+                break
+        G.lock = False
+        return {"ready": ready, "playing": playing}
+    except WebDriverException:
+        driver.close()
+        exit(0)
