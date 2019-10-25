@@ -251,6 +251,7 @@ func AllScores(ctx iris.Context) {
 			"school": player.School,
 			"sid": player.Sid,
 			"nick_name": player.Nickname,
+			"game_name": player.GameName,
 			"scores": v,
 		})
 	}

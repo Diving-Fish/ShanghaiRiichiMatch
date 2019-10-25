@@ -1,5 +1,8 @@
-f = open('source.txt', 'r', encoding='utf-8')
-s = f.readlines()
-for line in s:
-    arr = line.replace('\n', '').split('\t')
-    print('insert into players (school, sid, nickname, password) values ("%s", %d, "%s", "%s");' % (arr[1], 0, arr[2], arr[5]))
+import requests
+
+resp = requests.post("http://47.100.50.175:8088/api/public/push_score", json={
+    "name": "2-3",
+    "round": 1,
+    "point": 14.5
+})
+print(resp)
