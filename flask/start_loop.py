@@ -36,7 +36,7 @@ def submit_score():
             s2 = driver.find_element_by_xpath(path + "/td[%d]" % i).text
             arr = s2.split(' ')
             arr[1] = float(arr[1])
-            resp = requests.post("http://47.100.50.175:8088/api/public/push_score", json={
+            resp = requests.post("http://localhost:8088/api/public/push_score", json={
                 "round": 1,
                 "name": arr[0],
                 "point": arr[1]
@@ -47,11 +47,11 @@ def submit_score():
 
 def __start_match():
     print("try to start...")
-    resp = requests.get("http://47.100.50.175:5000/get_now_info")
+    resp = requests.get("http://localhost:5000/get_now_info")
     j = demjson.decode(resp.text, 'utf-8')
     ready = []
     for r in j["ready"]:
-        resp2 = requests.get("http://47.100.50.175:8088/api/public/score", {"round": 1, "name": r})
+        resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 1, "name": r})
         j2 = demjson.decode(resp2.text, 'utf-8')
         if j2["scores"] is None:
             j2["scores"] = []
@@ -59,7 +59,7 @@ def __start_match():
             continue
         ready.append(r)
     if len(ready) >= 4:
-        requests.post("http://47.100.50.175:5000/start_match", None, {
+        requests.post("http://localhost:5000/start_match", None, {
             "data": [
                 {"name": ready[0], "point": 25000},
                 {"name": ready[1], "point": 25000},
