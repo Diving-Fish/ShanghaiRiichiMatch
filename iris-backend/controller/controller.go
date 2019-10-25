@@ -224,8 +224,13 @@ func AllScores(ctx iris.Context) {
 	}
 	var scoreJson []JSON
 	for k, v := range scoreMap {
+		player := Player{}
+		db.First(&player, "game_id = ?", k)
 		scoreJson = append(scoreJson, JSON{
 			"id": k,
+			"school": player.School,
+			"sid": player.Sid,
+			"nick_name": player.Nickname,
 			"scores": v,
 		})
 	}
