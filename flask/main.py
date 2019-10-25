@@ -4,6 +4,8 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import WebDriverException
 
 
 class G:
@@ -90,19 +92,22 @@ def start_match():
     if G.lock:
         return "busy"
     G.lock = True
-    driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[1]').click()
-    sleep(0.2)
-    driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[3]').click()
-    sleep(0.2)
-    j = request.get_json()
-    ready = _select(j['data'])
-    print(ready)
-    if ready != 4:
+    try:
+        driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[1]').click()
+        sleep(0.2)
+        driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[3]').click()
+        sleep(0.2)
+        j = request.get_json()
+        ready = _select(j['data'])
+        print(ready)
+        if ready != 4:
+            G.lock = False
+            return "bad"
+        _start()
         G.lock = False
-        return "bad"
-    _start()
-    G.lock = False
-    return "ok"
+        return "ok"
+    except WebDriverException:
+        exit(0)
 
 
 @app.route('/get_now_info')

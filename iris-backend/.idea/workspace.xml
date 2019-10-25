@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba2bd12a-6652-4661-bac1-8e55b70e4c86" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../flask/snapshot.key" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../flask/start_loop.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../flask/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask/snapshot.key" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/snapshot.key" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../flask/start_loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/../flask/start_loop.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/controller/controller.go" beforeDir="false" afterPath="$PROJECT_DIR$/controller/controller.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -172,7 +171,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="1055" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37659457" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

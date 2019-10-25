@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 
 def submit_score():
     driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[4]').click()
-    sleep(1)
+    sleep(2)
     driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/div/div[2]/div/div/div/div[2]/div/div').click()
     sleep(1)
     driver.find_element_by_xpath('//*[@id="menu-"]/div[2]/ul/li[3]').click()
@@ -88,6 +88,8 @@ sleep(0.5)
 driver.find_element_by_xpath('//*[@id="root"]/div/div[2]/div/div/div[2]/div/form/div[3]/button').click()
 sleep(2)
 driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/ul/li/div/div[5]/a/button').click()
+sleep(3)
+driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[4]').click()
 sleep(10)
 while True:
     sleep(5)
