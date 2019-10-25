@@ -107,6 +107,7 @@ def start_match():
         G.lock = False
         return "ok"
     except WebDriverException:
+        driver.close()
         exit(0)
 
 

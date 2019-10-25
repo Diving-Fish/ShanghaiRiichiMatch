@@ -6,6 +6,7 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.common.exceptions import WebDriverException
 
 
 def submit_score():
@@ -94,7 +95,11 @@ driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/
 print("started successfully!")
 sleep(10)
 while True:
-    sleep(5)
-    submit_score()
-    sleep(2)
-    __start_match()
+    try:
+        sleep(5)
+        submit_score()
+        sleep(2)
+        __start_match()
+    except WebDriverException:
+        driver.close()
+        exit(0)
