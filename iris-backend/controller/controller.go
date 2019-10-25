@@ -211,6 +211,26 @@ func ChangePwd(ctx iris.Context) {
 
 // Public Routers
 
+func PlayerScores(ctx iris.Context) {
+	round, _ := ctx.URLParamInt("round")
+	name := ctx.URLParam("name")
+	player := Player{}
+	db.First(&player, "game_name = ?", name)
+	var scores []Score
+	db.Where("round = ? and game_id = ?", round, player.GameID).Find(&scores)
+	var s []float64
+	for _, score := range scores {
+		s = append(s, score.Point)
+	}
+	_, _ = ctx.JSON(JSON{
+		"id": player.GameID,
+		"school": player.School,
+		"sid": player.Sid,
+		"nick_name": player.Nickname,
+		"scores": s,
+	})
+}
+
 func AllScores(ctx iris.Context) {
 	round, _ := ctx.URLParamInt("round")
 	var scores []Score
