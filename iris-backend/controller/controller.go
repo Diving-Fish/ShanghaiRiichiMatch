@@ -229,7 +229,7 @@ func AllScores(ctx iris.Context) {
 			"scores": v,
 		})
 	}
-	_, _ = ctx.JSON(scores)
+	_, _ = ctx.JSON(scoreJson)
 }
 
 func PushScore(ctx iris.Context) {
