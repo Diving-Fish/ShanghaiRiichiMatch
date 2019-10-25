@@ -28,6 +28,14 @@ type Player struct {
 	Password string
 }
 
+type Score struct {
+	ID		int
+	GameID	int
+	Phase	int
+	Round	int
+	Point 	float64
+}
+
 var db *gorm.DB
 
 // Admin Routers
@@ -202,6 +210,57 @@ func ChangePwd(ctx iris.Context) {
 }
 
 // Public Routers
+
+func AllScores(ctx iris.Context) {
+	round, _ := ctx.URLParamInt("round")
+	var scores []Score
+	db.Where("round = ?", round).Find(&scores)
+	scoreMap := map[int][]float64{}
+	for _, score := range scores {
+		if scoreMap[score.GameID] == nil {
+			scoreMap[score.GameID] = []float64{}
+		}
+		scoreMap[score.GameID] = append(scoreMap[score.GameID], score.Point)
+	}
+	var scoreJson []JSON
+	for k, v := range scoreMap {
+		scoreJson = append(scoreJson, JSON{
+			"id": k,
+			"scores": v,
+		})
+	}
+	_, _ = ctx.JSON(scores)
+}
+
+func PushScore(ctx iris.Context) {
+	j := JSON{}
+	err := ctx.ReadJSON(&j)
+	if err != nil || j["name"] == nil || j["point"] == nil || j["round"] == nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		_, _ = ctx.JSON(JSON{
+			"msg": "json error",
+		})
+		return
+	}
+	name := j["name"].(string)
+	point := j["point"].(float64)
+	round := int(j["round"].(float64))
+	player := Player{}
+	var scores []Score
+	db.First(&player, "game_name = ?", name)
+	db.Find(&scores, "round = ? and game_id = ?", round, player.GameID)
+	phase := len(scores)
+	score := Score{
+		GameID: player.GameID,
+		Round: round,
+		Point: point,
+		Phase: phase,
+	}
+	db.Create(&score)
+	_, _ = ctx.JSON(JSON{
+		"msg": "success",
+	})
+}
 
 func FindAll(ctx iris.Context) {
 	var players []Player

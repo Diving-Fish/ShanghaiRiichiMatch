@@ -31,6 +31,8 @@ func main() {
 	}
 	public := app.Party("/api/public").AllowMethods(iris.MethodOptions)
 	{
+		public.Get("/all_scores", controller.AllScores)
+		public.Post("/push_score", controller.PushScore)
 		public.Get("/find_all", controller.FindAll)
 		public.Post("/login", controller.Login)
 		public.Get("/search_player", controller.SearchPlayerById)
