@@ -31,6 +31,7 @@ def submit_score():
             fw.close()
         if snapshot == txt:
             break
+        print("submitted: %s", txt)
         for i in [2, 3, 4, 5]:
             s2 = driver.find_element_by_xpath(path + "/td[%d]" % i).text
             arr = s2.split(' ')
@@ -77,11 +78,11 @@ def start_match():
 
 
 chrome_options = Options()
-# chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 driver = webdriver.Chrome(chrome_options=chrome_options)
 driver.get("https://majsoul.com/dhs/")
-driver.maximize_window()
+driver.set_window_size(1920, 1080)
 driver.find_element_by_id('username').send_keys('Dennis_Frank')
 driver.find_element_by_id('password').send_keys('Dfyshisb123')
 sleep(0.5)
@@ -90,6 +91,7 @@ sleep(2)
 driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/ul/li/div/div[5]/a/button').click()
 sleep(3)
 driver.find_element_by_xpath('//*[@id="root"]/div/header/div/div[3]/div/div/div/div/button[4]').click()
+print("started successfully!")
 sleep(10)
 while True:
     sleep(5)

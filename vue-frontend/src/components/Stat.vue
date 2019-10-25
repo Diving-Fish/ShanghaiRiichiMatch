@@ -5,7 +5,7 @@
       <el-select v-model="round">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
-      <el-table :data="data" v-loading="loading">
+      <el-table :border="true" :data="data" v-loading="loading">
         <el-table-column prop="rank" label="排名" />
         <el-table-column prop="school" min-width="120" label="学校" />
         <el-table-column prop="nick_name" min-width="120" label="昵称" />
