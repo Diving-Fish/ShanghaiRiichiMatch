@@ -281,6 +281,7 @@ func AllScores(ctx iris.Context) {
 			"nick_name": player.Nickname,
 			"game_name": player.GameName,
 			"scores": v,
+			"check_in": player.Status,
 		})
 	}
 	_, _ = ctx.JSON(scoreJson)
