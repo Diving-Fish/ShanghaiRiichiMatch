@@ -153,7 +153,7 @@ export default {
           for (let j of this.point_map.get(this.round)) {
             let i = j - 1;
             eval("ob.s" + i + " = ob.scores[" + i + "] ? ob.scores[" + i + "] : null")
-            eval("ob.s += ob.scores[" + i + "]")
+            eval("ob.s += ob.s" + i)
           }
           ob.s = parseFloat(ob.s.toFixed(1))
         }
