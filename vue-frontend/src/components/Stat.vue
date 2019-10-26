@@ -7,14 +7,14 @@
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
         <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt1" v-if="round == 1">仅查看打满6场的玩家</el-checkbox>
-        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt2">仅查看已签到的玩家</el-checkbox>
+        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt2" v-if="round == 1">仅查看已签到的玩家</el-checkbox>
       </div>
       <el-table :border="true" :data="filter_data" v-loading="loading">
         <el-table-column prop="rank" label="排名" />
         <el-table-column prop="school" min-width="120" label="学校" />
         <el-table-column prop="nick_name" min-width="120" label="昵称" />
         <el-table-column prop="game_name" min-width="120" label="雀魂昵称" />
-        <el-table-column v-for="a in [1,2,3,4,5,6]" :key="a" :label="'马点' + a" >
+        <el-table-column v-for="a in [1,2,3]" :key="a" :label="'马点' + a" >
           <template slot-scope="scope">
             <a v-if="scope.row.scores[a - 1] > 0" style="color: #00aa00">+{{scope.row.scores[a - 1]}}</a>
             <a v-if="scope.row.scores[a - 1] < 0" style="color: #ff5555">{{scope.row.scores[a - 1]}}</a>
@@ -40,7 +40,7 @@ export default {
   data() {
     return {
       loading: false,
-      round: 1,
+      round: 2,
       filt1: false,
       filt2: false,
       data: [],
@@ -109,7 +109,7 @@ export default {
   },
   created: function() {
     this.loading = true;
-    axios.get("http://47.100.50.175:8088/api/public/all_scores?round=1").then(response => {
+    axios.get("http://47.100.50.175:8088/api/public/all_scores?round=2").then(response => {
       let d = response.data
       for (let ob of d) {
         ob.school = this.school_map.get(ob.school)
