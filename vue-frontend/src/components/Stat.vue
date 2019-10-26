@@ -1,11 +1,14 @@
 <template>
   <div>
     <el-page-header @back="$router.push('/')" content="统计信息" />
-      <div style="margin: 30px;">
-      <el-select v-model="round">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
-      </el-select>
-      <el-table :border="true" :data="data" v-loading="loading">
+    <div style="margin: 30px;">
+      <div style="display: flex">
+        <el-select style="margin-bottom: 30px" v-model="round">
+          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
+        </el-select>
+        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt" v-if="round == 1">仅查看打满6场的玩家</el-checkbox>
+      </div>
+      <el-table :border="true" :data="filter_data" v-loading="loading">
         <el-table-column prop="rank" label="排名" />
         <el-table-column prop="school" min-width="120" label="学校" />
         <el-table-column prop="nick_name" min-width="120" label="昵称" />
@@ -36,6 +39,7 @@ export default {
     return {
       loading: false,
       round: 1,
+      filt: false,
       data: [],
       school_map: new Map([
         ['ECNU', '华东师范大学'],
@@ -118,14 +122,25 @@ export default {
       d.sort((a, b) => {
         return b.s - a.s
       })
+      this.data = d;
+      this.loading = false
+    })
+  },
+  computed: {
+    filter_data: function() {
+      let d = this.data
+      if (this.filt) {
+        d = d.filter(a => {
+          return a.s0 && a.s1 && a.s2 && a.s3 && a.s4 && a.s5;
+        })
+      }
       let rank = 1
       for (let ob of d) {
         ob.rank = rank;
         rank += 1;
       }
-      this.data = d;
-      this.loading = false
-    })
+      return d
+    }
   }
 }
 </script>
