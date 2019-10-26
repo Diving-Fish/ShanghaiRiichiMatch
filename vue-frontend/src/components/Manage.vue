@@ -64,6 +64,10 @@
         </el-form-item>
       </el-form>
     </div>
+    <el-footer v-if="$store.state.sid != 0 && stat.game_id != 0" style="margin-top: 20px">
+      <el-button type="primary" v-if="!stat.check_in" @click="checkin">签到</el-button>
+      <el-button type="primary" v-if="stat.check_in" :disabled="true" @click="checkin">已签到</el-button>
+    </el-footer>
     <el-footer v-if="stat.nickname != 0" style="margin-top: 20px">
       <el-button type="warning" @click="cpwdVisible = true">修改密码</el-button>
     </el-footer>
@@ -210,6 +214,14 @@ export default {
 
         });
       });
+    },
+    checkin() {
+      axios.get('http://47.100.50.175:8088/api/admin/get', {
+        headers: { Authorization: this.$store.state.jwt }
+      }).then(response => {
+        this.$message.success("签到成功")
+        this.status()
+      })
     },
     cpwdSubmit() {
       axios.post('http://47.100.50.175:8088/api/player/change_pwd', {
