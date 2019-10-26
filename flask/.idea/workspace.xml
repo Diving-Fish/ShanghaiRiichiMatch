@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9527bd3-fa15-4405-9e85-194714d14907" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../iris-backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../iris-backend/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="a9527bd3-fa15-4405-9e85-194714d14907" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -202,7 +200,7 @@
       <workItem from="1571990247907" duration="626000" />
       <workItem from="1571998043088" duration="13529000" />
       <workItem from="1572020717628" duration="727000" />
-      <workItem from="1572088581853" duration="2055000" />
+      <workItem from="1572088581853" duration="2521000" />
     </task>
     <servers />
   </component>

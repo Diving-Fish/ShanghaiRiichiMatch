@@ -149,13 +149,12 @@ export default {
         }
         for (let ob of d) {
           ob.school = this.school_map.get(ob.school)
-          ob.s0 = ob.scores[0] ? ob.scores[0] : null
-          ob.s1 = ob.scores[1] ? ob.scores[1] : null
-          ob.s2 = ob.scores[2] ? ob.scores[2] : null
-          ob.s3 = ob.scores[3] ? ob.scores[3] : null
-          ob.s4 = ob.scores[4] ? ob.scores[4] : null
-          ob.s5 = ob.scores[5] ? ob.scores[5] : null
-          ob.s = ob.s0 + ob.s1 + ob.s2 + ob.s3 + ob.s4 + ob.s5
+          ob.s = 0
+          for (let j of this.point_map.get(this.round)) {
+            let i = j - 1;
+            eval("ob.s" + i + " = ob.scores[" + i + "] ? ob.scores[" + i + "] : null")
+            eval("ob.s += ob.scores[" + i + "]")
+          }
           ob.s = parseFloat(ob.s.toFixed(1))
         }
         d.sort((a, b) => {
