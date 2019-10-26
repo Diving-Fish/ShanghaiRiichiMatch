@@ -310,7 +310,7 @@ func PushScore(ctx iris.Context) {
 	var scores []Score
 	db.First(&player, "game_name = ?", name)
 	db.Find(&scores, "round = ? and game_id = ?", round, player.GameID)
-	if player.School == "PD" {
+	if player.School == "PD" || player.Status != 1 {
 		_, _ = ctx.JSON(JSON{
 			"msg": "success",
 		})
