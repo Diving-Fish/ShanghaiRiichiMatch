@@ -32,7 +32,7 @@ def submit_score():
             fw.close()
         if snapshot == txt:
             break
-        print("submitted: %s", txt)
+        print("[Starter] Submitted: %s", txt)
         for i in [2, 3, 4, 5]:
             s2 = driver.find_element_by_xpath(path + "/td[%d]" % i).text
             arr = s2.split(' ')
@@ -47,7 +47,7 @@ def submit_score():
 
 
 def __start_match():
-    print("try to start...")
+    # print("try to start...")
     resp = requests.get("http://localhost:5000/get_now_info")
     j = demjson.decode(resp.text, 'utf-8')
     ready = []
@@ -68,7 +68,7 @@ def __start_match():
                 {"name": ready[3], "point": 25000}
             ]
         })
-        print("started: %s %s %s %s" % (ready[0], ready[1], ready[2], ready[3]))
+        print("[Starter] Started: %s %s %s %s" % (ready[0], ready[1], ready[2], ready[3]))
         return 1
     return 0
 
