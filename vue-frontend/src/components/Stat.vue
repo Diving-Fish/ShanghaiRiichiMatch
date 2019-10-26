@@ -6,7 +6,8 @@
         <el-select style="margin-bottom: 30px" v-model="round">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
-        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt" v-if="round == 1">仅查看打满6场的玩家</el-checkbox>
+        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt1" v-if="round == 1">仅查看打满6场的玩家</el-checkbox>
+        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt2">仅查看已签到的玩家</el-checkbox>
       </div>
       <el-table :border="true" :data="filter_data" v-loading="loading">
         <el-table-column prop="rank" label="排名" />
@@ -27,6 +28,7 @@
             <a v-if="scope.row.s == 0">{{scope.row.s}}</a>
           </template>
         </el-table-column>
+        <el-table-column prop="check_in" label="签到情况" />
       </el-table>
     </div>
   </div>
@@ -39,7 +41,8 @@ export default {
     return {
       loading: false,
       round: 1,
-      filt: false,
+      filt1: false,
+      filt2: false,
       data: [],
       school_map: new Map([
         ['ECNU', '华东师范大学'],
@@ -129,9 +132,14 @@ export default {
   computed: {
     filter_data: function() {
       let d = this.data
-      if (this.filt) {
+      if (this.filt1) {
         d = d.filter(a => {
           return a.s0 && a.s1 && a.s2 && a.s3 && a.s4 && a.s5;
+        })
+      }
+      if (this.filt2) {
+        d = d.filter(a => {
+          return a.check_in;
         })
       }
       let rank = 1
