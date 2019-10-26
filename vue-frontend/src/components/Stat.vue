@@ -12,7 +12,7 @@
         <el-table-column prop="school" min-width="120" label="学校" />
         <el-table-column prop="nick_name" min-width="120" label="昵称" />
         <el-table-column prop="game_name" min-width="120" label="雀魂昵称" />
-        <el-table-column v-for="a in [1,2,3]" :key="a" :label="'马点' + a" >
+        <el-table-column v-for="a in point_map.get(round)" :key="a" :label="'马点' + a" >
           <template slot-scope="scope">
             <a v-if="scope.row.scores[a - 1] > 0" style="color: #00aa00">+{{scope.row.scores[a - 1]}}</a>
             <a v-if="scope.row.scores[a - 1] < 0" style="color: #ff5555">{{scope.row.scores[a - 1]}}</a>
@@ -41,6 +41,10 @@ export default {
       filt1: false,
       filt2: false,
       data: [],
+      point_map: new Map([
+        [1, [1,2,3,4,5,6]],
+        [2, [1,2,3]]
+      ]),
       school_map: new Map([
         ['ECNU', '华东师范大学'],
         ['SISU', '上海外国语大学'],
@@ -128,15 +132,21 @@ export default {
       return d
     }
   },
+  watch: {
+    round() {
+      this.getList();
+    }
+  },
   methods: {
     getList() {
       this.loading = true;
       axios.get("http://47.100.50.175:8088/api/public/all_scores?round=" + this.round).then(response => {
+        let d = response.data
         if (d == null) {
           this.data = [];
+          this.loading = false;
           return;
         }
-        let d = response.data
         for (let ob of d) {
           ob.school = this.school_map.get(ob.school)
           ob.s0 = ob.scores[0] ? ob.scores[0] : null
