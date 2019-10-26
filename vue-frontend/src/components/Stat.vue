@@ -6,8 +6,6 @@
         <el-select style="margin-bottom: 30px" v-model="round">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
-        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt1" v-if="round == 1">仅查看打满6场的玩家</el-checkbox>
-        <el-checkbox style="margin-left: 30px; line-height: 40px" v-model="filt2" v-if="round == 1">仅查看已签到的玩家</el-checkbox>
       </div>
       <el-table :border="true" :data="filter_data" v-loading="loading">
         <el-table-column prop="rank" label="排名" />
@@ -28,7 +26,6 @@
             <a v-if="scope.row.s == 0">{{scope.row.s}}</a>
           </template>
         </el-table-column>
-        <el-table-column prop="check_in" label="签到情况" />
       </el-table>
     </div>
   </div>
@@ -108,26 +105,7 @@ export default {
     }
   },
   created: function() {
-    this.loading = true;
-    axios.get("http://47.100.50.175:8088/api/public/all_scores?round=2").then(response => {
-      let d = response.data
-      for (let ob of d) {
-        ob.school = this.school_map.get(ob.school)
-        ob.s0 = ob.scores[0] ? ob.scores[0] : null
-        ob.s1 = ob.scores[1] ? ob.scores[1] : null
-        ob.s2 = ob.scores[2] ? ob.scores[2] : null
-        ob.s3 = ob.scores[3] ? ob.scores[3] : null
-        ob.s4 = ob.scores[4] ? ob.scores[4] : null
-        ob.s5 = ob.scores[5] ? ob.scores[5] : null
-        ob.s = ob.s0 + ob.s1 + ob.s2 + ob.s3 + ob.s4 + ob.s5
-        ob.s = parseFloat(ob.s.toFixed(1))
-      }
-      d.sort((a, b) => {
-        return b.s - a.s
-      })
-      this.data = d;
-      this.loading = false
-    })
+    this.getList();
   },
   computed: {
     filter_data: function() {
@@ -148,6 +126,34 @@ export default {
         rank += 1;
       }
       return d
+    }
+  },
+  methods: {
+    getList() {
+      this.loading = true;
+      axios.get("http://47.100.50.175:8088/api/public/all_scores?round=" + this.round).then(response => {
+        if (d == null) {
+          this.data = [];
+          return;
+        }
+        let d = response.data
+        for (let ob of d) {
+          ob.school = this.school_map.get(ob.school)
+          ob.s0 = ob.scores[0] ? ob.scores[0] : null
+          ob.s1 = ob.scores[1] ? ob.scores[1] : null
+          ob.s2 = ob.scores[2] ? ob.scores[2] : null
+          ob.s3 = ob.scores[3] ? ob.scores[3] : null
+          ob.s4 = ob.scores[4] ? ob.scores[4] : null
+          ob.s5 = ob.scores[5] ? ob.scores[5] : null
+          ob.s = ob.s0 + ob.s1 + ob.s2 + ob.s3 + ob.s4 + ob.s5
+          ob.s = parseFloat(ob.s.toFixed(1))
+        }
+        d.sort((a, b) => {
+          return b.s - a.s
+        })
+        this.data = d;
+        this.loading = false
+      })
     }
   }
 }
