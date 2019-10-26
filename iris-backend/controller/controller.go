@@ -250,8 +250,14 @@ func PlayerScores(ctx iris.Context) {
 	for _, score := range scores {
 		s = append(s, score.Point)
 	}
+	var id int
+	if player.Status == -1 {
+		id = 0
+	} else {
+		id = player.GameID
+	}
 	_, _ = ctx.JSON(JSON{
-		"id": player.GameID,
+		"id": id,
 		"school": player.School,
 		"sid": player.Sid,
 		"nick_name": player.Nickname,

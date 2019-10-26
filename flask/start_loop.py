@@ -38,7 +38,7 @@ def submit_score():
             arr = s2.split(' ')
             arr[1] = float(arr[1])
             resp = requests.post("http://localhost:8088/api/public/push_score", json={
-                "round": 1,
+                "round": 2,
                 "name": arr[0],
                 "point": arr[1]
             })
@@ -52,7 +52,7 @@ def __start_match():
     j = demjson.decode(resp.text, 'utf-8')
     ready = []
     for r in j["ready"]:
-        resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 1, "name": r})
+        resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 2, "name": r})
         j2 = demjson.decode(resp2.text, 'utf-8')
         if j2["scores"] is None:
             j2["scores"] = []
