@@ -14,6 +14,7 @@
             <a v-if="scope.row.sid != 0 && !scope.row.bound">未绑定，密码为{{scope.row.password}}</a>
           </template>
         </el-table-column>
+        <el-table-column prop="check_in" label="下一场签到情况" />
       </el-table>
       <el-footer style="margin-top: 20px">
         <el-button @click="open" type="primary" :disabled="true">报名入口已关闭</el-button>
