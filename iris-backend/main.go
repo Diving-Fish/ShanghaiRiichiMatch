@@ -28,6 +28,8 @@ func main() {
 		player.Get("/status", controller.Status)
 		player.Post("/change_pwd", controller.ChangePwd)
 		player.Post("/bind", controller.Bind)
+		player.Get("/check_in", controller.CheckIn)
+		player.Get("/check_in_stat", controller.CheckInStatus)
 	}
 	public := app.Party("/api/public").AllowMethods(iris.MethodOptions)
 	{

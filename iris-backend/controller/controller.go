@@ -36,6 +36,13 @@ type Score struct {
 	Point 	float64
 }
 
+type Group struct {
+	ID		int
+	GameID	int
+	Round	int
+	GroupID	int
+}
+
 var db *gorm.DB
 
 // Admin Routers
@@ -126,6 +133,26 @@ func ApplyNewPlayer(ctx iris.Context) {
 
 // Player Routers
 
+func CheckInStatus(ctx iris.Context) {
+	sid, _ := ctx.Values().GetInt("sid")
+	school := ctx.Values().GetString("school")
+	player, _ := queryPlayerBySidAndSchool(sid, school)
+	_, _ = ctx.JSON(JSON{
+		"status": player.Status,
+	})
+}
+
+func CheckIn(ctx iris.Context) {
+	sid, _ := ctx.Values().GetInt("sid")
+	school := ctx.Values().GetString("school")
+	player, _ := queryPlayerBySidAndSchool(sid, school)
+	player.Status = 1
+	db.Save(&player)
+	_, _ = ctx.JSON(JSON{
+		"match_name": "128进96",
+	})
+}
+
 func AuthHandler(ctx iris.Context) {
 	sid, school := GetSidAndSchool(ctx.GetHeader("Authorization"))
 	if sid == -1 {
@@ -150,6 +177,7 @@ func Status(ctx iris.Context) {
 		"nickname": player.Nickname,
 		"game_id": player.GameID,
 		"game_name": player.GameName,
+		"check_in": player.Status,
 	})
 }
 
