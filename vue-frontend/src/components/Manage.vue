@@ -216,10 +216,10 @@ export default {
       });
     },
     checkin() {
-      axios.get('http://47.100.50.175:8088/api/admin/get', {
+      axios.get('http://47.100.50.175:8088/api/player/check_in', {
         headers: { Authorization: this.$store.state.jwt }
       }).then(response => {
-        this.$message.success("签到成功")
+        this.$message.success("比赛【" + response.data.match_name + "】签到成功")
         this.status()
       })
     },
