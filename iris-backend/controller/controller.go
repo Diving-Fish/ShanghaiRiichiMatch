@@ -149,7 +149,7 @@ func CheckIn(ctx iris.Context) {
 	player.Status = 1
 	db.Save(&player)
 	_, _ = ctx.JSON(JSON{
-		"match_name": "128进96",
+		"match_name": "96进64",
 	})
 }
 

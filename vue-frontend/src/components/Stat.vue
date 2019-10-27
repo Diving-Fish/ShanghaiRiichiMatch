@@ -6,6 +6,7 @@
         <el-select style="margin-bottom: 30px" v-model="round">
           <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
         </el-select>
+        <el-checkbox v-model="filt2" v-if="round == 2" style="line-height: 40px; margin-left: 30px">仅查看已签到玩家</el-checkbox>
       </div>
       <el-table :border="true" :data="filter_data" v-loading="loading">
         <el-table-column prop="rank" label="排名" />
@@ -43,7 +44,8 @@ export default {
       data: [],
       point_map: new Map([
         [1, [1,2,3,4,5,6]],
-        [2, [1,2,3]]
+        [2, [1,2,3]],
+        [3, [1,2,3]]
       ]),
       school_map: new Map([
         ['ECNU', '华东师范大学'],
