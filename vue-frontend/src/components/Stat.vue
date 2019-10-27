@@ -123,7 +123,7 @@ export default {
       }
       if (this.filt2) {
         d = d.filter(a => {
-          return a.check_in;
+          return (a.check_in == 1);
         })
       }
       let rank = 1
