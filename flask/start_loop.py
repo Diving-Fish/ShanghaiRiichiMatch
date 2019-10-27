@@ -38,7 +38,7 @@ def submit_score():
             arr = s2.split(' ')
             arr[1] = float(arr[1])
             resp = requests.post("http://localhost:8088/api/public/push_score", json={
-                "round": 2,
+                "round": 3,
                 "name": arr[0],
                 "point": arr[1]
             })
@@ -52,11 +52,11 @@ def __start_match():
     j = demjson.decode(resp.text, 'utf-8')
     ready = []
     for r in j["ready"]:
-        resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 2, "name": r})
+        resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 3, "name": r})
         j2 = demjson.decode(resp2.text, 'utf-8')
         if j2["scores"] is None:
             j2["scores"] = []
-        if j2["id"] == 0: # or len(j2["scores"]) >= 6:
+        if j2["id"] == 0 or len(j2["scores"]) >= 3:
             continue
         ready.append(r)
     if len(ready) >= 4:
@@ -99,7 +99,7 @@ while True:
         sleep(5)
         submit_score()
         sleep(2)
-        __start_match()
+        start_match()
     except WebDriverException:
         driver.close()
         exit(0)
