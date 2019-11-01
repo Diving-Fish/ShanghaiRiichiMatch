@@ -132,7 +132,7 @@ def get_now_info():
         while True:
             try:
                 l = []
-                for i in range(1, 4):
+                for i in range(1, 5):
                     l.append(driver.find_element_by_xpath('//*[@id="root"]/div/div[1]/main/div[2]/div/div[2]/div[%d]/div/ul/li[%d]/div/span' % (index, i)).text)
                 playing.append(l)
                 index += 1

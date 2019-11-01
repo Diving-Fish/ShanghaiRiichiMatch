@@ -2,6 +2,7 @@
 package controller
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
@@ -37,10 +38,10 @@ type Score struct {
 }
 
 type Group struct {
-	ID		int
-	GameID	int
+	GameName	string
 	Round	int
 	GroupID	int
+	Process	int
 }
 
 var db *gorm.DB
@@ -343,6 +344,70 @@ func FindAll(ctx iris.Context) {
 	_, _ = ctx.JSON(j)
 }
 
+func GetPlayerByGroup(ctx iris.Context) {
+	round, err := ctx.URLParamInt("round")
+	if err != nil {
+		_, _ = ctx.JSON(JSON{
+			"msg": "err",
+		})
+		return
+	}
+	process, err := ctx.URLParamInt("process")
+	if err != nil {
+		_, _ = ctx.JSON(JSON{
+			"msg": "err",
+		})
+		return
+	}
+	resp, err := http.Get("http://127.0.0.1:5000/get_now_info")
+	if err != nil {
+		_, _ = ctx.JSON(JSON{
+			"msg": "err",
+		})
+		return
+	}
+	body, _ := ioutil.ReadAll(resp.Body)
+	j := JSON{}
+	_ = json.Unmarshal(body, &j)
+	ready := j["ready"].([]interface{})
+	playing := j["playing"].([]interface{})
+	readyMap := map[string]bool{}
+	playingMap := map[string]bool{}
+	for _, v := range ready {
+		readyMap[v.(string)] = true
+	}
+	for _, v := range playing {
+		playingMap[v.([]interface{})[0].(string)] = true
+	}
+	var groups []Group
+	db.Find(&groups, "round = ? and process = ?", round, process)
+	var allList []JSON
+	for i := 0; i < len(groups) / 4; i++ {
+		var group []Group
+		db.Find(&group, "round = ? and process = ? and group_id = ?", round, process, i)
+		var playerList []JSON
+		allReady := true
+		playing := false
+		for _, v := range group {
+			allReady = allReady && readyMap[v.GameName]
+			playerList = append(playerList, JSON{
+				"name": v.GameName,
+				"ready": readyMap[v.GameName],
+			})
+			if playingMap[v.GameName] {
+				playing = true
+			}
+		}
+		j2 := JSON{
+			"playing": playing,
+			"ready": ready,
+			"player_list": playerList,
+		}
+		allList = append(allList, j2)
+	}
+	_, _ = ctx.JSON(allList)
+}
+
 func Login(ctx iris.Context) {
 	j := JSON{}
 	err := ctx.ReadJSON(&j)
@@ -391,28 +456,6 @@ func SearchPlayerById(ctx iris.Context) {
 	_, _ = ctx.JSON(JSON{
 		"name": s,
 	})
-}
-
-func QueryPlayer(ctx iris.Context) {
-	id, _ := ctx.URLParamInt("id")
-	player := Player{}
-	db.Where("id = ?", id).First(&player)
-	if player.ID != 0 {
-		_, _ = ctx.JSON(map[string]interface{} {
-			"reg": 1,
-		})
-	} else {
-		name, err := findPlayer(id)
-		if err != nil {
-			_, _ = ctx.JSON(map[string]interface{} {
-				"err": 1,
-			})
-		} else {
-			_, _ = ctx.JSON(map[string]interface{} {
-				"name": name,
-			})
-		}
-	}
 }
 
 // Functions

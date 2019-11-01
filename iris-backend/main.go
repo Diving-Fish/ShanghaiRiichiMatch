@@ -39,6 +39,7 @@ func main() {
 		public.Get("/find_all", controller.FindAll)
 		public.Post("/login", controller.Login)
 		public.Get("/search_player", controller.SearchPlayerById)
+		public.Get("/get_by_group", controller.GetPlayerByGroup)
 	}
 	_ = app.Run(iris.Addr(":8088"))
 }
