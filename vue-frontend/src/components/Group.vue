@@ -9,7 +9,12 @@
         <el-option v-for="item in bz_map.get(round)" :key="item" :label="'第' + item + '半庄'" :value="item" />
       </el-select>
       <el-table style="margin-top: 30px" :border="true" :data="data" v-loading="loading">
-        <el-table-column label="玩家1">
+        <el-table-column label="桌号">
+          <template slot-scope="scope">
+            {{ scope.row.group_id + 1}}
+          </template>
+        </el-table-column>
+        <el-table-column v-for="i in [1, 2, 3, 4]" :key="i" :label="'玩家' + i">
           <template slot-scope="scope">
 
           </template>
@@ -57,10 +62,14 @@ export default {
       }],
     }
   },
+  created: function() {
+    this.getList()
+  },
   methods: {
     getList() {
       this.loading = true;
       axios.get("http://47.100.50.175:8088/api/public/get_group?round=" + this.round + "&process=" + this.process).then(response => {
+        console.log(response.data)
         this.data = response.data;
         this.loading = false;
       })
