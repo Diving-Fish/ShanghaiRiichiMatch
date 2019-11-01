@@ -372,6 +372,7 @@ func GetGroup(ctx iris.Context) {
 			p := Player{}
 			db.First(&p, "game_name = ?", v.GameName)
 			playerList = append(playerList, JSON{
+				"group_id": i,
 				"name": v.GameName,
 				"school": p.School,
 				"nickname": p.Nickname,
