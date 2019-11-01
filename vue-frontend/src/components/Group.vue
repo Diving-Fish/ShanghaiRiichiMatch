@@ -1,8 +1,8 @@
 <template>
   <div>
     <el-page-header @back="$router.push('/')" content="分组信息" />
-      <p>已签到的玩家将以绿色标识</p>
       <div style="margin: 30px;">
+        <p>已签到的玩家将以绿色标识</p>
       <el-select v-model="round">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
@@ -17,7 +17,7 @@
         </el-table-column>
         <el-table-column v-for="i in [1, 2, 3, 4]" :key="i" :label="'玩家' + i">
           <template slot-scope="scope">
-            <a :style="scope.row.player_list[i - 1].status == 1 ? 'color: green' : 'color: red'">{{ scope.row.player_list[i - 1].name }}</a>
+            <a :style="scope.row.player_list[i - 1].checkin == 1 ? 'color: green' : 'color: red'">{{ scope.row.player_list[i - 1].name }}</a>
           </template>
         </el-table-column>
       </el-table>
