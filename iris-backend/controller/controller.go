@@ -542,4 +542,7 @@ func init() {
 	if !db.HasTable(&Score{}) {
 		db.CreateTable(&Score{})
 	}
+	if !db.HasTable(&Group{}) {
+		db.CreateTable(&Group{})
+	}
 }
