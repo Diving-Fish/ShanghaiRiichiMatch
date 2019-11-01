@@ -37,8 +37,8 @@ def submit_score():
             s2 = driver.find_element_by_xpath(path + "/td[%d]" % i).text
             arr = s2.split(' ')
             arr[1] = float(arr[1])
-            resp = requests.post("http://localhost:8088/api/public/push_score", json={
-                "round": 3,
+            resp = requests.post("http://47.100.50.175:8088/api/public/push_score", json={
+                "round": 4,
                 "name": arr[0],
                 "point": arr[1]
             })
@@ -48,22 +48,22 @@ def submit_score():
 
 def __start_match():
     # print("try to start...")
-    resp = requests.get("http://localhost:8088/api/public/get_by_group?round=4&process=1")
+    resp = requests.get("http://47.100.50.175:8088/api/public/get_by_group?round=4&process=1")
     j = demjson.decode(resp.text, 'utf-8')
     for r in j:
         ready = []
         player_list = r["player_list"]
         if r["ready"]:
             for n in player_list:
-                resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 4, "name": n["name"]})
+                resp2 = requests.get("http://47.100.50.175:8088/api/public/score", {"round": 4, "name": n["name"]})
                 j2 = demjson.decode(resp2.text, 'utf-8')
                 if j2["scores"] is None:
                     j2["scores"] = []
                 if j2["id"] == 0 or len(j2["scores"]) >= 1:
                     continue
-            ready.append(n["name"])
+                ready.append(n["name"])
         if len(ready) >= 4:
-            requests.post("http://localhost:5000/start_match", None, {
+            requests.post("http://47.100.50.175:5000/start_match", None, {
                 "data": [
                     {"name": ready[0], "point": 25000},
                     {"name": ready[1], "point": 25000},
@@ -80,7 +80,7 @@ def start_match():
 
 
 chrome_options = Options()
-# chrome_options.add_argument('--headless')
+chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 driver = webdriver.Chrome(chrome_options=chrome_options)
 driver.get("https://majsoul.com/dhs/")
