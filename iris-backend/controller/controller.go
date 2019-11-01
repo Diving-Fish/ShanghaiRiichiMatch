@@ -44,6 +44,11 @@ type Group struct {
 	Process	int
 }
 
+type Pair struct {
+	Key string
+	Value int
+}
+
 var db *gorm.DB
 
 // Admin Routers
@@ -144,6 +149,12 @@ func CheckInStatus(ctx iris.Context) {
 }
 
 func CheckIn(ctx iris.Context) {
+	pair := Pair{}
+	db.First(&pair, "key = cant_checkin")
+	if pair.Value == 1 {
+		ctx.StatusCode(iris.StatusBadRequest)
+		return
+	}
 	sid, _ := ctx.Values().GetInt("sid")
 	school := ctx.Values().GetString("school")
 	player, _ := queryPlayerBySidAndSchool(sid, school)
@@ -590,5 +601,8 @@ func init() {
 	}
 	if !db.HasTable(&Group{}) {
 		db.CreateTable(&Group{})
+	}
+	if !db.HasTable(&Pair{}) {
+		db.CreateTable(&Pair{})
 	}
 }

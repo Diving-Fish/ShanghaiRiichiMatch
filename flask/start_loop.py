@@ -48,29 +48,30 @@ def submit_score():
 
 def __start_match():
     # print("try to start...")
-    resp = requests.get("http://localhost:5000/get_now_info")
+    resp = requests.get("http://localhost:8088/api/public/get_by_group?round=4&process=1")
     j = demjson.decode(resp.text, 'utf-8')
-    ready = []
-    for r in j["ready"]:
-        resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 3, "name": r})
-        j2 = demjson.decode(resp2.text, 'utf-8')
-        if j2["scores"] is None:
-            j2["scores"] = []
-        if j2["id"] == 0 or len(j2["scores"]) >= 3:
-            continue
-        ready.append(r)
-    if len(ready) >= 4:
-        requests.post("http://localhost:5000/start_match", None, {
-            "data": [
-                {"name": ready[0], "point": 25000},
-                {"name": ready[1], "point": 25000},
-                {"name": ready[2], "point": 25000},
-                {"name": ready[3], "point": 25000}
-            ]
-        })
-        print("[Starter] Started: %s %s %s %s" % (ready[0], ready[1], ready[2], ready[3]))
-        return 1
-    return 0
+    for r in j:
+        ready = []
+        player_list = r["player_list"]
+        if r["ready"]:
+            for n in player_list:
+                resp2 = requests.get("http://localhost:8088/api/public/score", {"round": 4, "name": n["name"]})
+                j2 = demjson.decode(resp2.text, 'utf-8')
+                if j2["scores"] is None:
+                    j2["scores"] = []
+                if j2["id"] == 0 or len(j2["scores"]) >= 1:
+                    continue
+            ready.append(n["name"])
+        if len(ready) >= 4:
+            requests.post("http://localhost:5000/start_match", None, {
+                "data": [
+                    {"name": ready[0], "point": 25000},
+                    {"name": ready[1], "point": 25000},
+                    {"name": ready[2], "point": 25000},
+                    {"name": ready[3], "point": 25000}
+                ]
+            })
+            print("[Starter] Started: %s %s %s %s" % (ready[0], ready[1], ready[2], ready[3]))
 
 
 def start_match():
@@ -79,7 +80,7 @@ def start_match():
 
 
 chrome_options = Options()
-chrome_options.add_argument('--headless')
+# chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 driver = webdriver.Chrome(chrome_options=chrome_options)
 driver.get("https://majsoul.com/dhs/")
@@ -99,7 +100,7 @@ while True:
         sleep(5)
         submit_score()
         sleep(2)
-        start_match()
+        __start_match()
     except WebDriverException:
         driver.close()
         exit(0)
