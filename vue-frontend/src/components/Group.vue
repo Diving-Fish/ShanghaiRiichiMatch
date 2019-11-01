@@ -16,7 +16,7 @@
         </el-table-column>
         <el-table-column v-for="i in [1, 2, 3, 4]" :key="i" :label="'玩家' + i">
           <template slot-scope="scope">
-
+            {{ scope.row.player_list[i - 1].name }}
           </template>
         </el-table-column>
       </el-table>
@@ -65,11 +65,23 @@ export default {
   created: function() {
     this.getList()
   },
+  watch: {
+    round: function() {
+      this.getList()
+    },
+    process: function() {
+      this.getList()
+    }
+  },
   methods: {
     getList() {
       this.loading = true;
       axios.get("http://47.100.50.175:8088/api/public/get_group?round=" + this.round + "&process=" + this.process).then(response => {
-        console.log(response.data)
+        if (response.data == null) {
+          this.data = [];
+          this.loading = false;
+          return;
+        }
         this.data = response.data;
         this.loading = false;
       })
