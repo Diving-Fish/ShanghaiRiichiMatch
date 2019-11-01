@@ -40,6 +40,7 @@ func main() {
 		public.Post("/login", controller.Login)
 		public.Get("/search_player", controller.SearchPlayerById)
 		public.Get("/get_by_group", controller.GetPlayerByGroup)
+		public.Get("/get_group", controller.GetGroup)
 	}
 	_ = app.Run(iris.Addr(":8088"))
 }

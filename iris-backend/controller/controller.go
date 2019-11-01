@@ -344,9 +344,10 @@ func FindAll(ctx iris.Context) {
 	_, _ = ctx.JSON(j)
 }
 
-func GetPlayerByGroup(ctx iris.Context) {
+func GetGroup(ctx iris.Context) {
 	round, err := ctx.URLParamInt("round")
 	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
 			"msg": "err",
 		})
@@ -354,6 +355,48 @@ func GetPlayerByGroup(ctx iris.Context) {
 	}
 	process, err := ctx.URLParamInt("process")
 	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		_, _ = ctx.JSON(JSON{
+			"msg": "err",
+		})
+		return
+	}
+	var groups []Group
+	db.Find(&groups, "round = ? and process = ?", round, process)
+	var allList []JSON
+	for i := 0; i < len(groups) / 4; i++ {
+		var group []Group
+		db.Find(&group, "round = ? and process = ? and group_id = ?", round, process, i)
+		var playerList []JSON
+		for _, v := range group {
+			p := Player{}
+			db.First(&p, "game_name = ?", v.GameName)
+			playerList = append(playerList, JSON{
+				"name": v.GameName,
+				"school": p.School,
+				"nickname": p.Nickname,
+			})
+		}
+		j2 := JSON{
+			"player_list": playerList,
+		}
+		allList = append(allList, j2)
+	}
+	_, _ = ctx.JSON(allList)
+}
+
+func GetPlayerByGroup(ctx iris.Context) {
+	round, err := ctx.URLParamInt("round")
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
+		_, _ = ctx.JSON(JSON{
+			"msg": "err",
+		})
+		return
+	}
+	process, err := ctx.URLParamInt("process")
+	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
 			"msg": "err",
 		})
@@ -361,6 +404,7 @@ func GetPlayerByGroup(ctx iris.Context) {
 	}
 	resp, err := http.Get("http://127.0.0.1:5000/get_now_info")
 	if err != nil {
+		ctx.StatusCode(iris.StatusBadRequest)
 		_, _ = ctx.JSON(JSON{
 			"msg": "err",
 		})
@@ -400,7 +444,7 @@ func GetPlayerByGroup(ctx iris.Context) {
 		}
 		j2 := JSON{
 			"playing": playing,
-			"ready": ready,
+			"ready": allReady,
 			"player_list": playerList,
 		}
 		allList = append(allList, j2)
