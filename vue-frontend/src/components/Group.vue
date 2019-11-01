@@ -1,6 +1,7 @@
 <template>
   <div>
     <el-page-header @back="$router.push('/')" content="分组信息" />
+      <p>已签到的玩家将以绿色标识</p>
       <div style="margin: 30px;">
       <el-select v-model="round">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
@@ -11,12 +12,12 @@
       <el-table style="margin-top: 30px" :border="true" :data="data" v-loading="loading">
         <el-table-column label="桌号">
           <template slot-scope="scope">
-            {{ scope.row.group_id + 1}}
+            {{ scope.row.group_id + 1 }}
           </template>
         </el-table-column>
         <el-table-column v-for="i in [1, 2, 3, 4]" :key="i" :label="'玩家' + i">
           <template slot-scope="scope">
-            {{ scope.row.player_list[i - 1].name }}
+            <a :style="scope.row.player_list[i - 1].status == 1 ? 'color: green' : 'color: red'">{{ scope.row.player_list[i - 1].name }}</a>
           </template>
         </el-table-column>
       </el-table>

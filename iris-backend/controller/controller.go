@@ -375,6 +375,7 @@ func GetGroup(ctx iris.Context) {
 				"name": v.GameName,
 				"school": p.School,
 				"nickname": p.Nickname,
+				"checkin": p.Status,
 			})
 		}
 		j2 := JSON{
