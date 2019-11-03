@@ -38,7 +38,7 @@ def submit_score():
             arr = s2.split(' ')
             arr[1] = float(arr[1])
             resp = requests.post("http://47.100.50.175:8088/api/public/push_score", json={
-                "round": 4,
+                "round": 5,
                 "name": arr[0],
                 "point": arr[1]
             })
@@ -48,14 +48,14 @@ def submit_score():
 
 def __start_match():
     # print("try to start...")
-    resp = requests.get("http://47.100.50.175:8088/api/public/get_by_group?round=4&process=1")
+    resp = requests.get("http://47.100.50.175:8088/api/public/get_by_group?round=5&process=1")
     j = demjson.decode(resp.text, 'utf-8')
     for r in j:
         ready = []
         player_list = r["player_list"]
         if r["ready"]:
             for n in player_list:
-                resp2 = requests.get("http://47.100.50.175:8088/api/public/score", {"round": 4, "name": n["name"]})
+                resp2 = requests.get("http://47.100.50.175:8088/api/public/score", {"round": 5, "name": n["name"]})
                 j2 = demjson.decode(resp2.text, 'utf-8')
                 if j2["scores"] is None:
                     j2["scores"] = []
