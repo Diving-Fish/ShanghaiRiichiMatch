@@ -143,6 +143,13 @@ func CheckInStatus(ctx iris.Context) {
 	sid, _ := ctx.Values().GetInt("sid")
 	school := ctx.Values().GetString("school")
 	player, _ := queryPlayerBySidAndSchool(sid, school)
+	pair := Pair{}
+	db.First(&pair, "key = cant_checkin")
+	if pair.Value == 1 && player.Status != -1 {
+		_, _ = ctx.JSON(JSON{
+			"status": -2,
+		})
+	}
 	_, _ = ctx.JSON(JSON{
 		"status": player.Status,
 	})

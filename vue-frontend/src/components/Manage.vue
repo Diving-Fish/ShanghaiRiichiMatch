@@ -65,7 +65,8 @@
       </el-form>
     </div>
     <el-footer v-if="$store.state.sid != 0 && stat.game_id != 0" style="margin-top: 20px">
-      <el-button type="primary" v-if="stat.check_in == 0" :disabled="true" @click="checkin">签到</el-button>
+      <el-button type="primary" v-if="stat.check_in == -2" :disabled="true" @click="checkin">签到</el-button>
+      <el-button type="primary" v-if="stat.check_in == 0" :disabled="false" @click="checkin">签到</el-button>
       <el-button type="primary" v-if="stat.check_in == 1" :disabled="true" @click="checkin">已签到</el-button>
     </el-footer>
     <el-footer v-if="stat.nickname != 0" style="margin-top: 20px">
