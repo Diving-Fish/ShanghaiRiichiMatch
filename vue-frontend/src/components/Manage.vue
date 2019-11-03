@@ -222,7 +222,7 @@ export default {
       }).then(response => {
         this.$message.success("比赛【" + response.data.match_name + "】签到成功")
         this.status()
-      })
+      }).catch(() => { this.$message.error("当前未开放或签到时间已过") });
     },
     cpwdSubmit() {
       axios.post('http://47.100.50.175:8088/api/player/change_pwd', {
