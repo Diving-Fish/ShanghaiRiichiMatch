@@ -149,6 +149,7 @@ func CheckInStatus(ctx iris.Context) {
 		_, _ = ctx.JSON(JSON{
 			"status": -2,
 		})
+		return
 	}
 	_, _ = ctx.JSON(JSON{
 		"status": player.Status,
