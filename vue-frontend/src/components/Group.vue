@@ -31,15 +31,15 @@ export default {
   data() {
     return {
       loading: false,
-      round: 4,
+      round: 5,
       process: 1,
       data: [],
       bz_map: new Map([
-        [4, [1, 2, 3, 4]],
-        [5, [1]],
-        [6, [1]],
-        [7, [1]],
-        [8, [1]]
+        [4, [1,2,3,4]],
+        [5, [1,2,3,4]],
+        [6, [1,2,3,4]],
+        [7, [1,2,3,4]],
+        [8, [1,2,3,4,5]]
       ]),
       options: [{
         value: 4,

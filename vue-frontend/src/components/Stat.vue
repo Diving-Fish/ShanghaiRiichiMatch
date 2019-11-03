@@ -37,7 +37,7 @@ export default {
   data() {
     return {
       loading: false,
-      round: 4,
+      round: 5,
       filt1: false,
       filt2: false,
       data: [],
@@ -45,7 +45,11 @@ export default {
         [1, [1,2,3,4,5,6]],
         [2, [1,2,3]],
         [3, [1,2,3]],
-        [4, [1,2,3,4]]
+        [4, [1,2,3,4]],
+        [5, [1,2,3,4]],
+        [6, [1,2,3,4]],
+        [7, [1,2,3,4]],
+        [8, [1,2,3,4,5]]
       ]),
       school_map: new Map([
         ['ECNU', '华东师范大学'],
