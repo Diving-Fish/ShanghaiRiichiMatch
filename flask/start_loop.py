@@ -48,7 +48,7 @@ def submit_score():
 
 def __start_match():
     # print("try to start...")
-    resp = requests.get("http://47.100.50.175:8088/api/public/get_by_group?round=5&process=1")
+    resp = requests.get("http://47.100.50.175:8088/api/public/get_by_group?round=5&process=4")
     j = demjson.decode(resp.text, 'utf-8')
     for r in j:
         ready = []
@@ -59,7 +59,7 @@ def __start_match():
                 j2 = demjson.decode(resp2.text, 'utf-8')
                 if j2["scores"] is None:
                     j2["scores"] = []
-                if j2["id"] == 0 or len(j2["scores"]) >= 1:
+                if j2["id"] == 0 or len(j2["scores"]) >= 4:
                     continue
                 ready.append(n["name"])
         if len(ready) >= 4:
