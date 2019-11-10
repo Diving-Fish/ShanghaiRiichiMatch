@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       loading: false,
-      round: 6,
+      round: 7,
       process: 1,
       data: [],
       bz_map: new Map([
