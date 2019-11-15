@@ -169,7 +169,7 @@ func CheckIn(ctx iris.Context) {
 	player.Status = 1
 	db.Save(&player)
 	_, _ = ctx.JSON(JSON{
-		"match_name": "8 进 4",
+		"match_name": "决赛",
 	})
 }
 

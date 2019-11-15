@@ -14,4 +14,4 @@ for r in bigarr:
             j = j + 1
             k = 0
         k = k + 1
-        print('insert into groups (game_name, round, group_id, process) values (\"%s\", 6, %d, 4);' % (m, j))
+        print('insert into groups (game_name, round, group_id, process) values (\"%s\", 8, %d, 1);' % (m, j))

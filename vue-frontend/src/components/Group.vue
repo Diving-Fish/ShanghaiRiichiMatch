@@ -7,7 +7,7 @@
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
       <el-select style="margin-left: 20px" v-model="process">
-        <el-option v-for="item in bz_map.get(round)" :key="item" :label="'第' + item + '半庄'" :value="item" />
+        <el-option v-for="item in bz_map.get(round)" :key="item" :label="round == 8 ? '所有半庄' : '第' + item + '半庄'" :value="item" />
       </el-select>
       <el-table style="margin-top: 30px" :border="true" :data="data" v-loading="loading">
         <el-table-column label="桌号">
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       loading: false,
-      round: 7,
+      round: 8,
       process: 1,
       data: [],
       bz_map: new Map([
@@ -39,7 +39,7 @@ export default {
         [5, [1,2,3,4]],
         [6, [1,2,3,4]],
         [7, [1,2,3,4]],
-        [8, [1,2,3,4,5]]
+        [8, [1]]
       ]),
       options: [{
         value: 4,

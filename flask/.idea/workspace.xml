@@ -5,6 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/a.txt" beforeDir="false" afterPath="$PROJECT_DIR$/a.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/regroup.py" beforeDir="false" afterPath="$PROJECT_DIR$/regroup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/source.txt" beforeDir="false" afterPath="$PROJECT_DIR$/source.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../iris-backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../iris-backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue-frontend/src/components/Group.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vue-frontend/src/components/Group.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../vue-frontend/src/components/Stat.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../vue-frontend/src/components/Stat.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +106,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="checkin" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="majsoul-backend-python" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -115,7 +119,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/checkin.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -171,10 +175,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.regroup" />
+        <item itemvalue="Python.checkin" />
         <item itemvalue="Python.b" />
         <item itemvalue="Python.start_loop" />
         <item itemvalue="Python.a" />
-        <item itemvalue="Python.main" />
       </list>
     </recent_temporary>
   </component>
@@ -210,6 +214,9 @@
       <workItem from="1572772485857" duration="1321000" />
       <workItem from="1573206653864" duration="591000" />
       <workItem from="1573210934173" duration="1901000" />
+      <workItem from="1573377665044" duration="147000" />
+      <workItem from="1573386819421" duration="1648000" />
+      <workItem from="1573813476874" duration="36000" />
     </task>
     <servers />
   </component>
@@ -261,7 +268,8 @@
     <SUITE FILE_PATH="coverage/flask$start_loop.coverage" NAME="start_loop Coverage Results" MODIFIED="1572772507779" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/majsoul_backend_python$snapshot.coverage" NAME="snapshot Coverage Results" MODIFIED="1566647454359" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$a.coverage" NAME="a Coverage Results" MODIFIED="1572004560355" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/flask$regroup.coverage" NAME="regroup Coverage Results" MODIFIED="1573219361194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask$regroup.coverage" NAME="regroup Coverage Results" MODIFIED="1573813514143" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/flask$checkin.coverage" NAME="checkin Coverage Results" MODIFIED="1573377760457" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/flask$sendmail.coverage" NAME="sendmail Coverage Results" MODIFIED="1570380366084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
